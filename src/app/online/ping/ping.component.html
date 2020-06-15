@@ -1,9 +1,12 @@
 <div>
-  <span>Do ping:</span>
+  <label for="host" class="col-form-label">Do ping:</label>
   <input type="text" class="host form-control" placeholder="Host" id="host" />
-  <span>Cnt:</span>
-  <span><input type='number' value='4' min="1" max="20" id="count"/></span>
-  <button class="btn btn-danger" type="button" value="PING">
+  <label for="count"class="col-form-label">Cnt: </label>
+  <span><input type='number' class="cnt form-control" value='4' min="1" max="20" id="count"/></span>
+  <button class="btn btn-danger" type="submit" value="PING">
     <span>Do IT!!!</span>
+  </button>
+  <button class="btn btn-info" type="reset" value="PING">
+    <span>Reset</span>
   </button>
 </div>
