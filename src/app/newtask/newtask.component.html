@@ -2,7 +2,7 @@
   <form (ngSubmit)="onSubmited(ntask)" #ntask="ngForm">
     Name task:<input type="text" id="name1" name="name1" ngModel> <br>
     Uses <select id="sel1" name="sellist1" ngModel><option selected>pinger</option><option>traceroute</option></select> <span id="count1">cnt=<input type="number" value="1" min="1" id="cnt" name="cnt" ngModel></span> packetsize=<input type="number" value="32" min="1" id="packetsize" name="packetsize" ngModel> ttl=<input type="number" value="53" min="1" id="ttl" name="ttl" ngModel> timeout=<input type="number" value="53" min="1" id="timeout" name="timeout" ngModel><br>
-    to host <input type="text" id="host2" name="text2" ngModel> at <input type="datetime-local" id="date1" name="date1" ngModel>. Every <input type="number" value="1" min="1" id="num" name="text3" ngModel> <select id="sel2" name="sellist2" ngModel><option>yrs</option><option>mns</option><option>wks</option><option>days</option><option selected>hrs</option><option>mins</option></select>.<br>
+    to host <input type="text" id="host2" name="text2" ngModel> at <input type="datetime-local" id="date1" name="date1" value="new Date();" ngModel>. Every <input type="number" value="1" min="1" id="num" name="text3" ngModel> <select id="sel2" name="sellist2" ngModel><option>yrs</option><option>mns</option><option>wks</option><option>days</option><option selected>hrs</option><option>mins</option></select>.<br>
     With <select id="sel3" name="sellist3" ngModel><option selected>result=all</option><option>result>60</option></select> uses <select id="sel4" name="sellist4" ngModel><option>email</option><option>telegramm</option></select>   <input type="text" id="host3" name="text4"  ngModel>
     <button id="butt4" type="submit" value="submit">Save..</button>
   </form>

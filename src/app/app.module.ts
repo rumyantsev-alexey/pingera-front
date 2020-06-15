@@ -15,6 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes =[
   { path: '', component: HomeComponent},
+  { path: 'online', component: PingComponent},
   { path: 'online/ping', component: PingComponent},
   { path: 'online/traceroute', component: TracerouteComponent},
   { path: 'list', component: ListComponent},

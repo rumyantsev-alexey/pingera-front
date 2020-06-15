@@ -30,5 +30,7 @@ export class NewtaskComponent implements OnInit {
     newtask.timeout = ntask.form.value.timeout
     newtask.ttl = ntask.form.value.ttl
     console.log(newtask)
+    this.http.post<TaskDto>('http://localhost:8080/post', newtask)
+      .subscribe( x => console.log(x))
   }
 }
