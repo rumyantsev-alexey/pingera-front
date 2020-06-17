@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {TaskDto} from "../classez/classez.module";
+import {Task} from "../classez/classez.module";
 
 @Component({
   selector: 'app-list',
@@ -10,18 +10,22 @@ import {TaskDto} from "../classez/classez.module";
 
 
 export class ListComponent implements OnInit{
-  tasks: TaskDto[] = []
+  tasks: Task[] = []
   tools: string[] = ["ping", "traceroute"]
 
   constructor(private http: HttpClient) {
- }
+  }
 
   ngOnInit() {
-    this.http.get<TaskDto[]>('http://localhost:8080/getall')
+    this.http.get<Task[]>('http://localhost:8080/getall')
       .subscribe(t => {
         this.tasks = t
       })
-    console.log(this.tasks)
+  }
+
+  deleteTask(id: number) {
+    this.http.delete<void>('http://localhost:8080/delete/' + id)
+      .subscribe(() => this.tasks = this.tasks.filter(t => t.id !== id))
   }
 
 }

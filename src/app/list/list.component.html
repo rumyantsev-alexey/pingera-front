@@ -11,12 +11,12 @@
     </thead>
     <tbody id="tbody">
     <tr *ngFor="let task of tasks">
-      <td>{{tools[task.sellist1]}}</td>
+      <td>{{task.sellist1}}</td>
       <td>{{task.text2}}</td>
       <td>{{task.date1 | date :'medium'}}</td>
       <td>{{task.text3 + " " + task.sellist2}}</td>
       <button class="btn btn-info">Посмотреть</button>
-      <button class="btn btn-danger">Удалить</button>
+      <button class="btn btn-light" (click)="deleteTask(task.id)">Удалить</button>
     </tr>
     </tbody>
   </table>

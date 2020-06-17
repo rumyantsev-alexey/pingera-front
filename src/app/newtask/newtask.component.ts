@@ -8,29 +8,23 @@ import {TaskDto} from "../classez/classez.module";
   styleUrls: ['./newtask.component.css']
 })
 export class NewtaskComponent implements OnInit {
+  newtask: TaskDto;
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.newtask = new TaskDto()
   }
 
   onSubmited(ntask) {
-    let newtask: TaskDto = new TaskDto()
-    newtask.name1=ntask.form.value.name1
-    newtask.cnt = ntask.form.value.cnt
-    newtask.date1 = ntask.form.value.date1
-    newtask.packetsize = ntask.form.value.packetsize
-    newtask.sellist1 = ntask.form.value.sellist1
-    newtask.sellist2 = ntask.form.value.sellist2
-    newtask.sellist3 = ntask.form.value.sellist3
-    newtask.sellist4 = ntask.form.value.sellist4
-    newtask.text2 = ntask.form.value.text2
-    newtask.text3 = ntask.form.value.text3
-    newtask.text4 = ntask.form.value.text4
-    newtask.timeout = ntask.form.value.timeout
-    newtask.ttl = ntask.form.value.ttl
-    console.log(newtask)
-    this.http.post<TaskDto>('http://localhost:8080/post', newtask)
-      .subscribe( x => console.log(x))
+     this.http.post<TaskDto>('http://localhost:8080/post', this.newtask)
+      .subscribe()
+    ntask.reset()
+  }
+
+  resetForm(ntask) {
+    ntask.reset()
+   this.newtask = new TaskDto()
+    console.log(this.newtask)
   }
 }
