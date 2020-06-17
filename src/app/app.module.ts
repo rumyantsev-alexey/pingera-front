@@ -12,6 +12,7 @@ import { TracerouteComponent } from './online/traceroute/traceroute.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes =[
   { path: '', component: HomeComponent},
@@ -31,7 +32,8 @@ const appRoutes: Routes =[
     HomeComponent,
     NotFoundComponent,
     PingComponent,
-    TracerouteComponent
+    TracerouteComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
