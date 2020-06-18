@@ -21,7 +21,9 @@ const appRoutes: Routes =[
   { path: 'online/traceroute', component: TracerouteComponent},
   { path: 'list', component: ListComponent},
   { path: 'newtask', component: NewtaskComponent},
-  { path: '**', component: NotFoundComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', redirectTo: ''},
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

@@ -1,17 +1,13 @@
-<form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-  <label for="username">Username</label>
-  <input type="text"
-         name="username" [(ngModel)]="model.username"
-         id="username" required/>
-  <div ngIf="f.submitted
-          && !username.valid">Username is required</div>
-  <label for="password">Password</label>
-  <input type="password"
-         name="password" [(ngModel)]="model.password"
-         id="password" required/>
-  <div ngIf="f.submitted
-          && !password.valid">Password is required</div>
-  <div>
-    <button [disabled]="f.form.valid"> Login </button>
-  </div>
+﻿<form name="form" (ngSubmit)="fff.form.valid && login()" #fff="ngForm" novalidate>
+    <div [ngClass]="{ 'has-error': fff.submitted}">
+        <label for="name">Username</label>
+        <input type="text" name="name" [(ngModel)]="model.name" id="name" required />
+    </div>
+    <div [ngClass]="{ 'has-error': fff.submitted}">
+        <label for="password">Password</label>
+        <input type="password" name="password" [(ngModel)]="model.password" #password id="password" required />
+    </div>
+    <div>
+        <button [disabled]="!fff.form.valid">Login</button>
+    </div>
 </form>
