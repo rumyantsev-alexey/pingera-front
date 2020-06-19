@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, tap} from 'rxjs/operators';
+import {GlobalConstants} from "../classez/global-constants";
+
 @Component({
     selector: 'home',
     templateUrl: './home.component.html'
@@ -9,9 +10,7 @@ import { catchError, map, tap} from 'rxjs/operators';
 
 export class HomeComponent implements OnInit {
 
-  userName: string;
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public Gl: GlobalConstants) { }
 
     ngOnInit() {
         let url = 'http://localhost:8080/user';
@@ -21,9 +20,10 @@ export class HomeComponent implements OnInit {
         });
 
         let options = { headers: headers };
+
         this.http.post<Observable<Object>>(url, {}, options).
             subscribe(principal => {
-                this.userName = principal['name'];
+                this.Gl.cuName = principal['name']
             },
             error => {
                 if(error.status == 401)
@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
 
     logout() {
         sessionStorage.setItem('token', '');
+        this.Gl.cuName = ''
     }
 
     private handleError(error: HttpErrorResponse) {
