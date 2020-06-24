@@ -14,6 +14,7 @@ import {FormsModule} from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { TaskComponent } from './task/task.component';
 
 const appRoutes: Routes =[
   { path: '', component: HomeComponent},
@@ -37,7 +38,8 @@ const appRoutes: Routes =[
     PingComponent,
     TracerouteComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,

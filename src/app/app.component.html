@@ -1,6 +1,6 @@
 
 <header>
-  <span>user: </span>{{UserName}}
+  <span>  user: </span>{{UserName}}
   <nav role="navigation">
     <ul>
       <li>
@@ -25,7 +25,7 @@
           </ul>
         </div>
       </li>
-      <li>
+      <li *ngIf='UserName != "null"'>
         <a href="/list">
           <div>
             List tasks
@@ -33,7 +33,7 @@
           </div>
         </a>
       </li>
-      <li>
+      <li *ngIf='UserName != "null"'>
         <a href="/newtask">
           <div>
             New task

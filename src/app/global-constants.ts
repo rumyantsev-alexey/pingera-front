@@ -7,7 +7,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
   providedIn: "root"
 })
 export class GlobalConstants{
-  cuName: string = localStorage.getItem("userName")
+  cuName: string = localStorage.getItem("cuName")
+  cuPassword: string = localStorage.getItem("cuPassword")
 
   constructor(private http:HttpClient) {
     console.log("Constuct GC...")
@@ -24,20 +25,17 @@ export class GlobalConstants{
 
     this.http.post<Observable<Object>>(url, {}, options).
     subscribe(principal => {
-        localStorage.setItem("userName",principal['name'])
+        this.cuName = principal['name']
+        this.cuPassword = principal['password']
+        localStorage.setItem("cuName",this.cuName)
+        localStorage.setItem("cuPassword",this.cuPassword)
       },
       error => {
         if(error.status == 401)
           alert('Unauthorized');
       }
     );
-    this.cuName = localStorage.getItem("userName")
     return of<string>(this.cuName);
-  }
-
-
-  logout() {
-    sessionStorage.setItem('token', '');
   }
 
 }

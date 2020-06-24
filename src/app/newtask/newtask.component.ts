@@ -17,7 +17,7 @@ export class NewtaskComponent implements OnInit {
   }
 
   onSubmited(ntask) {
-     this.http.post<TaskDto>('http://localhost:8080/post', this.newtask)
+     this.http.post<TaskDto>('http://localhost:8080/posttask', this.newtask)
       .subscribe()
     ntask.reset()
   }

@@ -16,15 +16,26 @@ export class ListComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.http.get<Task[]>('http://localhost:8080/getall')
+  this.getAllTasks()
+  }
+
+  getTask(id: number) {
+    this.http.get<Task[]>('http://localhost:8080/getalltasks' + id)
       .subscribe(t => {
         this.tasks = t
       })
   }
 
   deleteTask(id: number) {
-    this.http.delete<void>('http://localhost:8080/delete/' + id)
+    this.http.delete<void>('http://localhost:8080/deletetask/' + id)
       .subscribe(() => this.tasks = this.tasks.filter(t => t.id !== id))
   }
 
+
+  getAllTasks() {
+    this.http.get<Task[]>('http://localhost:8080/getalltasks')
+      .subscribe(t => {
+        this.tasks = t
+      })
+  }
 }

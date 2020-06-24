@@ -1,7 +1,7 @@
 <div class="container">
   <table class="table table-hover" id="List">
     <thead>
-    <tr>
+    <tr *ngIf="tasks.length !== 0">
       <th>Tools</th>
       <th>Host</th>
       <th>Begin</th>

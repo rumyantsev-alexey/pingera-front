@@ -21,9 +21,4 @@ export class HomeComponent implements OnInit {
         console.log("(Home) Change cuName value on",str)
       })
     }
-
-  logout() {
-    sessionStorage.setItem('token', '');
-  }
-
 }

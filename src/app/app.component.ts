@@ -16,6 +16,8 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     console.log("ngOnInit App...")
+    localStorage.setItem("cuName",null)
+    localStorage.setItem("cuPassword",null)
     this.Gl.getCuName().subscribe((str) => {
       this.UserName = str
       console.log("(App) Change cuName value on",str)
