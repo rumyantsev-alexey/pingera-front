@@ -11,7 +11,6 @@ import {Task} from "../classez/classez.module";
 
 export class ListComponent implements OnInit{
   tasks: Task[] = []
-  tools: string[] = ["ping", "traceroute"]
 
   constructor(private http: HttpClient) {
   }

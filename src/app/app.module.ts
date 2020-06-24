@@ -13,6 +13,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 const appRoutes: Routes =[
   { path: '', component: HomeComponent},
@@ -22,7 +23,7 @@ const appRoutes: Routes =[
   { path: 'list', component: ListComponent},
   { path: 'newtask', component: NewtaskComponent},
   { path: 'login', component: LoginComponent },
-  { path: 'logout', redirectTo: ''},
+  { path: 'logout', component: LogoutComponent},
   { path: '**', redirectTo: '' }
 ];
 
@@ -35,7 +36,8 @@ const appRoutes: Routes =[
     NotFoundComponent,
     PingComponent,
     TracerouteComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -47,4 +49,5 @@ const appRoutes: Routes =[
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

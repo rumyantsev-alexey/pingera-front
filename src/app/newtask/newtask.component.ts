@@ -22,9 +22,4 @@ export class NewtaskComponent implements OnInit {
     ntask.reset()
   }
 
-  resetForm(ntask) {
-    ntask.reset()
-   this.newtask = new TaskDto()
-    console.log(this.newtask)
-  }
 }

@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private http: HttpClient
-    ) { }
+    )
+    { }
 
     ngOnInit() {
         sessionStorage.setItem('token', '');

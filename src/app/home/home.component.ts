@@ -1,7 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import {GlobalConstants} from "../classez/global-constants";
+import {GlobalConstants} from "../global-constants";
 
 @Component({
     selector: 'home',
@@ -10,42 +8,22 @@ import {GlobalConstants} from "../classez/global-constants";
 
 export class HomeComponent implements OnInit {
 
-  constructor(private http: HttpClient, public Gl: GlobalConstants) { }
+  public UserName: string
+
+  constructor(private Gl:GlobalConstants) {
+    console.log("Constuct Home...")
+  }
 
     ngOnInit() {
-        let url = 'http://localhost:8080/user';
-
-        let headers: HttpHeaders = new HttpHeaders({
-            'Authorization': 'Basic ' + sessionStorage.getItem('token')
-        });
-
-        let options = { headers: headers };
-
-        this.http.post<Observable<Object>>(url, {}, options).
-            subscribe(principal => {
-                this.Gl.cuName = principal['name']
-            },
-            error => {
-                if(error.status == 401)
-                    alert('Unauthorized');
-            }
-        );
+      console.log("ngOnInit Home...")
+      this.Gl.getCuName().subscribe((str) => {
+        this.UserName = str
+        console.log("(Home) Change cuName value on",str)
+      })
     }
 
-    logout() {
-        sessionStorage.setItem('token', '');
-        this.Gl.cuName = ''
-    }
+  logout() {
+    sessionStorage.setItem('token', '');
+  }
 
-    private handleError(error: HttpErrorResponse) {
-        if (error.error instanceof ErrorEvent) {
-          console.error('An error occurred:', error.error.message);
-        } else {
-          console.error(
-            `Backend returned code ${error.status}, ` +
-            `body was: ${error.error}`);
-        }
-        return throwError(
-          'Something bad happened; please try again later.');
-      };
 }
