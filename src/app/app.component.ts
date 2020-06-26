@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {GlobalConstants} from "./global-constants";
+import {UsersessionService} from "./usersession/usersession.service";
 
 @Component({
   selector: 'app-root',
@@ -10,17 +10,15 @@ export class AppComponent implements OnInit{
 
   public UserName: string
 
-  constructor(public  Gl:GlobalConstants) {
+  constructor(public  US:UsersessionService) {
     console.log("Constuct App...")
  }
 
   ngOnInit() {
     console.log("ngOnInit App...")
-    localStorage.setItem("cuName",null)
-    localStorage.setItem("cuPassword",null)
-    this.Gl.getCuName().subscribe((str) => {
-      this.UserName = str
-      console.log("(App) Change cuName value on",str)
+    this.US.getCuName().subscribe((str) => {
+    this.UserName = str
+    console.log("(App) Change cuName value on",str)
     })
   }
 }

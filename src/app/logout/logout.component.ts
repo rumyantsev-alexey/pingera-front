@@ -12,8 +12,7 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit(): void {
     sessionStorage.setItem('token', '');
-    localStorage.setItem("cuName", null)
-    localStorage.setItem("cuPassword", null)
+    localStorage.clear()
     this.router.navigate(['']);
   }
 
