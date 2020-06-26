@@ -32,7 +32,7 @@ export class GlobalConstants{
       },
       error => {
         if(error.status == 401)
-          alert('Unauthorized');
+          alert('Unauthorized user');
       }
     );
     return of<string>(this.cuName);

@@ -32,7 +32,10 @@ export class LoginComponent implements OnInit {
         }).subscribe(isValid => {
             if (isValid) {
                 sessionStorage.setItem('token', btoa(this.model.name + ':' + this.model.password));
-              localStorage.setItem("userName",this.model.name)
+                localStorage.setItem("cuName",this.model.name)
+                localStorage.setItem("cuPassword",this.model.password)
+                console.log(localStorage.getItem('cuName'))
+                console.log(localStorage.getItem('cuPassword'))
                 this.router.navigate(['']);
             } else {
                 alert("Authentication failed.")

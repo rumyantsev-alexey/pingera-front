@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Task} from "../classez/classez.module";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-list',
@@ -11,8 +12,10 @@ import {Task} from "../classez/classez.module";
 
 export class ListComponent implements OnInit{
   tasks: Task[] = []
+  textheader: string
+  textbody:string
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -37,5 +40,11 @@ export class ListComponent implements OnInit{
       .subscribe(t => {
         this.tasks = t
       })
+  }
+
+  test(modal, textheader: string, textbody:string) {
+    this.textheader = textheader
+    this.textbody = textbody
+    this.modalService.open(modal, { centered: true})
   }
 }

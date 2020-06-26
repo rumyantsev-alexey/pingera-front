@@ -15,9 +15,22 @@
       <td>{{task.text2}}</td>
       <td>{{task.date1 | date :'medium'}}</td>
       <td>{{task.text3 + " " + task.sellist2}}</td>
-      <button class="btn btn-info">Посмотреть</button>
+      <button class="btn btn-info" (click)="test(modal, task.name1, 'TestBody')">Посмотреть</button>
       <button class="btn btn-light" (click)="deleteTask(task.id)">Удалить</button>
     </tr>
     </tbody>
   </table>
+
+
+<button class="btn btn-info" (click)="test(modal, 'testheader', 'TestBody')">Посмотреть</button>
+
+<ng-template #modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{textheader}}</h4>
+  </div>
+  <div class="modal-body">
+    <p>{{textbody}}</p>
+  </div>
+</ng-template>
+
 </div>

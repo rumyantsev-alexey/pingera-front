@@ -16,7 +16,7 @@ export class TaskComponent implements OnInit {
   }
 
   onAddReader(modal) {
-    this.modalService.open(modal, { centered: true });
+    this.modalService.open(modal, { centered: true })
   }
 
   showTask(id: number) {
