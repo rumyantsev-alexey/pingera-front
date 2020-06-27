@@ -16,9 +16,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
       console.log("ngOnInit Home...")
-      this.US.getCuName().subscribe((str) => {
-        this.UserName = str
-        console.log("(Home) Change cuName value on",str)
-      })
+      this.UserName = this.US.getUserName()
+      console.log("(Home) Change cuName value on", this.US.getUserName())
     }
 }

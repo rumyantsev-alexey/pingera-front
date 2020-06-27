@@ -16,9 +16,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     console.log("ngOnInit App...")
-    this.US.getCuName().subscribe((str) => {
-    this.UserName = str
-    console.log("(App) Change cuName value on",str)
-    })
+    this.UserName = this.US.getUserName()
+    console.log("(App) Change cuName value on",this.US.getUserName())
   }
 }

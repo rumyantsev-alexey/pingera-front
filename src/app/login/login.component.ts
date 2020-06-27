@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {UserDto} from "../classez/classez.module";
 import {UsersessionService} from "../usersession/usersession.service";
@@ -25,18 +25,24 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        console.log(this.model)
-        let url = 'http://localhost:8080/login';
-        this.http.post<Observable<boolean>>(url, {
+        this.http.post<Observable<boolean>>('http://localhost:8080/login', {
             name: this.model.name,
             password: this.model.password
         }).subscribe(isValid => {
-            console.log('LOGIN:', isValid)
-            if (isValid) {
-                sessionStorage.setItem('token', btoa(this.model.name + ':' + this.model.password));
-                this.router.navigate(['']);
+           if (isValid) {
+             sessionStorage.setItem('token', btoa(this.model.name + ':' + this.model.password))
+             /*let headers: HttpHeaders = new HttpHeaders({
+                'Authorization': 'Basic ' + sessionStorage.getItem('token')
+              })
+             this.http.post<Observable<UserDto>>('http://localhost:8080/authuser', {
+               name: this.model.name,
+               password: this.model.password
+             }).subscribe(u => {
+               this.model.id = u.id
+             }) */
+             this.router.navigate([''])
             } else {
-                alert("Authentication failed.")
+              alert("(login) Authentication failed.")
             }
         });
     }

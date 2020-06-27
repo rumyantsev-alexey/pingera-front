@@ -12,7 +12,7 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit(): void {
     sessionStorage.setItem('token', '');
-    localStorage.clear()
+    sessionStorage.clear()
     this.router.navigate(['']);
   }
 
