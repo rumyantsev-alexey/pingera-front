@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {UserDto} from "../classez/classez.module";
 import {UsersessionService} from "../usersession/usersession.service";
+import {delay} from "rxjs/operators";
 
 @Component({
     selector: 'login',
@@ -31,15 +32,13 @@ export class LoginComponent implements OnInit {
         }).subscribe(isValid => {
            if (isValid) {
              sessionStorage.setItem('token', btoa(this.model.name + ':' + this.model.password))
-             /*let headers: HttpHeaders = new HttpHeaders({
-                'Authorization': 'Basic ' + sessionStorage.getItem('token')
-              })
-             this.http.post<Observable<UserDto>>('http://localhost:8080/authuser', {
+/*             this.http.post<Observable<UserDto>>('http://localhost:8080/authuser', {
                name: this.model.name,
                password: this.model.password
              }).subscribe(u => {
                this.model.id = u.id
              }) */
+             delay(1000)
              this.router.navigate([''])
             } else {
               alert("(login) Authentication failed.")

@@ -6,7 +6,6 @@ import { ListComponent } from './list/list.component';
 import { NewtaskComponent } from './newtask/newtask.component';
 import {RouterModule, Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { NotFoundComponent } from './not-found/not-found.component';
 import { PingComponent } from './online/ping/ping.component';
 import { TracerouteComponent } from './online/traceroute/traceroute.component';
 import {HttpClientModule} from "@angular/common/http";
@@ -34,7 +33,6 @@ const appRoutes: Routes =[
     ListComponent,
     NewtaskComponent,
     HomeComponent,
-    NotFoundComponent,
     PingComponent,
     TracerouteComponent,
     LoginComponent,

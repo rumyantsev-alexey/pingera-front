@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Task} from "../classez/classez.module";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
@@ -30,21 +30,24 @@ export class ListComponent implements OnInit{
   }
 
   deleteTask(id: number) {
-    this.http.delete<void>('http://localhost:8080/deletetask/' + id)
+    let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
+    this.http.delete<void>('http://localhost:8080/deletetask/' + id, {headers})
       .subscribe(() => this.tasks = this.tasks.filter(t => t.id !== id))
   }
 
 
   getAllTasks() {
-    this.http.get<Task[]>('http://localhost:8080/getalltasks')
-      .subscribe(t => {
-        this.tasks = t
-      })
+  let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
+
+  this.http.get<Task[]>('http://localhost:8080/getalltasksforauthuser', {headers})
+  .subscribe(t => {
+  this.tasks = t
+  })
   }
 
-  test(modal, textheader: string, textbody:string) {
-    this.textheader = textheader
-    this.textbody = textbody
-    this.modalService.open(modal, { centered: true})
-  }
+test(modal, textheader: string, textbody:string) {
+this.textheader = textheader
+this.textbody = textbody
+this.modalService.open(modal, { centered: true})
+}
 }
