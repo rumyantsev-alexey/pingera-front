@@ -1,6 +1,5 @@
 import {UserDto} from "../classez/classez.module";
 import {Injectable, OnInit} from "@angular/core";
-import {Observable, of} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
@@ -20,7 +19,6 @@ export class UsersessionService implements OnInit {
       this.User.name = "none"
       this.User.password = "none"
     }
-    console.log(this.User)
   }
 
   ngOnInit(): void {

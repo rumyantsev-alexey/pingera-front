@@ -10,10 +10,9 @@ import { PingComponent } from './online/ping/ping.component';
 import { TracerouteComponent } from './online/traceroute/traceroute.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
-import { TaskComponent } from './task/task.component';
 
 const appRoutes: Routes =[
   { path: '', component: HomeComponent},
@@ -36,8 +35,9 @@ const appRoutes: Routes =[
     PingComponent,
     TracerouteComponent,
     LoginComponent,
-    LogoutComponent,
-    TaskComponent
+    LogoutComponent
+  ],
+  entryComponents: [
   ],
   imports: [
     BrowserModule,
@@ -46,7 +46,7 @@ const appRoutes: Routes =[
     FormsModule,
     NgbModule
   ],
-  providers: [],
+  providers: [NgbActiveModal],
   bootstrap: [AppComponent]
 })
 export class AppModule {

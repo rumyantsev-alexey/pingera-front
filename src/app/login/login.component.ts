@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import {Component, NgZone, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private http: HttpClient,
+        private zone: NgZone
     )
     { }
 
@@ -38,7 +39,6 @@ export class LoginComponent implements OnInit {
              }).subscribe(u => {
                this.model.id = u.id
              }) */
-             delay(1000)
              this.router.navigate([''])
             } else {
               alert("(login) Authentication failed.")

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {TaskDto} from "../classez/classez.module";
 import {Router} from "@angular/router";
-import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-newtask',
@@ -24,7 +23,6 @@ export class NewtaskComponent implements OnInit {
     this.http.post<TaskDto>('http://localhost:8080/posttask', this.newtask, {headers})
       .subscribe()
     ntask.reset()
-    delay(1000)
     this.router.navigate(['list']);
 
   }

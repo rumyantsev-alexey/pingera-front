@@ -10,25 +10,29 @@
     </tr>
     </thead>
     <tbody id="tbody">
-    <tr *ngFor="let task of tasks">
+    <tr *ngFor="let task of tasks" class='clickable-row' (click)="openModalWindows(modal, task)">
       <td>{{task.sellist1}}</td>
       <td>{{task.text2}}</td>
       <td>{{task.date1 | date :'medium'}}</td>
       <td>{{task.text3 + " " + task.sellist2}}</td>
-      <button class="btn btn-info" (click)="test(modal, task.name1, 'TestBody')">Посмотреть</button>
-      <button class="btn btn-light" (click)="deleteTask(task.id)">Удалить</button>
+      <button class="btn btn-light btn-sm" (click)="deleteTask(task.id)">Удалить</button>
     </tr>
     </tbody>
   </table>
 
 
-<ng-template #modal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">{{textheader}}</h4>
-  </div>
-  <div class="modal-body">
-    <p>{{textbody}}</p>
-  </div>
-</ng-template>
+  <ng-template #modal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{currTask.name1}}</h4>
+    </div>
+    <div class="modal-body">
+      <p>
+        Name task: {{currTask.name1}} id={{currTask.id}} <br>
+        Uses {{currTask.sellist1}} count={{currTask.cnt}} packetsize={{currTask.packetsize}} ttl={{currTask.ttl}} timeout={{currTask.timeout}}<br>
+        to host {{currTask.text2}} at {{currTask.date1 | date :'medium'}}. Every {{currTask.text3}} {{currTask.sellist2}}.<br>
+        With {{currTask.sellist3}} uses {{currTask.sellist4}} with attr {{currTask.text4}}.
+      </p>
+    </div>
+  </ng-template>
 
 </div>

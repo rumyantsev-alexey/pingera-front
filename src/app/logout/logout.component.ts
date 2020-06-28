@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-logout',
@@ -14,7 +13,6 @@ export class LogoutComponent implements OnInit {
   ngOnInit(): void {
     sessionStorage.setItem('token', '');
     sessionStorage.clear()
-    delay(2000)
     this.router.navigate(['']);
   }
 
