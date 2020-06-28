@@ -13,9 +13,6 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 export class ListComponent implements OnInit{
   tasks: Task[] = []
 
-  textheader: string
-  textbody: string
-
   currTask: Task = new Task()
 
   constructor(private http: HttpClient, private modalService: NgbModal) {
@@ -40,12 +37,14 @@ export class ListComponent implements OnInit{
 
 
   getAllTasks() {
-    let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
+    if (sessionStorage.getItem('token') != null) {
+      let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
 
-    this.http.get<Task[]>('http://localhost:8080/getalltasksforauthuser', {headers})
-      .subscribe(t => {
-        this.tasks = t
-      })
+      this.http.get<Task[]>('http://localhost:8080/getalltasksforauthuser', {headers})
+        .subscribe(t => {
+          this.tasks = t
+        })
+    }
   }
 
   openModalWindows(modal, task: Task) {

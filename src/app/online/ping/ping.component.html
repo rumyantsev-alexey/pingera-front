@@ -1,12 +1,25 @@
-<div>
+<form (ngSubmit)="onPing(modal)" #pping="ngForm">
   <label for="host" class="col-form-label">Do ping:</label>
-  <input type="text" class="host form-control" placeholder="Host" id="host" />
-  <label for="count"class="col-form-label">Cnt: </label>
-  <span><input type='number' class="cnt form-control" value='4' min="1" max="20" id="count"/></span>
+  <input type="text" class="host form-control" placeholder="Host" id="host" [(ngModel)]="host" required name="host"/>
+  <label for="count" class="col-form-label"> Count:</label>
+  <input type='number' class="cnt form-control" value='4' min="1" max="20" id="count" [(ngModel)]="count" required name="cnt"/>
   <button class="btn btn-danger" type="submit" value="PING">
     <span>Do IT!!!</span>
   </button>
-  <button class="btn btn-info" type="reset" value="PING">
+  <button class="btn btn-info" type="reset" value="PING" (click)="pping.reset();">
     <span>Reset</span>
   </button>
-</div>
+</form>
+
+<ng-template #modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Host:{{host}} count:{{count}}</h4>
+  </div>
+  <div class="modal-body">
+    <div *ngFor="let p of ping">
+      <p>
+          {{p.duration}}
+      </p>
+    </div>
+  </div>
+</ng-template>

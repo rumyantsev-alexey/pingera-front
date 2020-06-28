@@ -18,13 +18,14 @@ export class NewtaskComponent implements OnInit {
   }
 
   onSubmited(ntask) {
-    let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
+    if (sessionStorage.getItem('token') != null) {
+      let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
 
-    this.http.post<TaskDto>('http://localhost:8080/posttask', this.newtask, {headers})
-      .subscribe()
-    ntask.reset()
-    this.router.navigate(['list']);
-
+      this.http.post<TaskDto>('http://localhost:8080/posttask', this.newtask, {headers})
+        .subscribe()
+      ntask.reset()
+      this.router.navigate(['list']);
+    }
   }
 
 }
