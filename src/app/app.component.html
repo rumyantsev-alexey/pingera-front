@@ -28,8 +28,16 @@
       <li *ngIf='UserName != "none"'>
         <a href="/list">
           <div>
-            List tasks
+            List current tasks
             <span>List sheduler current users tasks</span>
+          </div>
+        </a>
+      </li>
+      <li *ngIf='UserName != "none"'>
+        <a href="/results">
+          <div>
+            Last complete tasks
+            <span>Show results last complete tasks</span>
           </div>
         </a>
       </li>

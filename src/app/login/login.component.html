@@ -8,6 +8,9 @@
         <input type="password" name="password" [(ngModel)]="model.password" #password id="password" required />
     </div>
     <div>
-        <button [disabled]="!fff.form.valid">Login</button>
+        <button [disabled]="!fff.form.valid" class="btn btn-info">Login as exist user</button>
     </div>
 </form>
+<br>
+<br>
+<button class="btn btn-info" (click)="createNewUser()">New user</button>

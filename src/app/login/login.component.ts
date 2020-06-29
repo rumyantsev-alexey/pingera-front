@@ -33,16 +33,15 @@ export class LoginComponent implements OnInit {
         }).subscribe(isValid => {
            if (isValid) {
              sessionStorage.setItem('token', btoa(this.model.name + ':' + this.model.password))
-/*             this.http.post<Observable<UserDto>>('http://localhost:8080/authuser', {
-               name: this.model.name,
-               password: this.model.password
-             }).subscribe(u => {
-               this.model.id = u.id
-             }) */
              this.router.navigate([''])
             } else {
               alert("(login) Authentication failed.")
             }
         });
     }
+
+  createNewUser() {
+    this.router.navigate(['newuser'])
+    }
+
 }

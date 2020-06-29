@@ -11,8 +11,14 @@ export class Ping {
 
 }
 
-export class UserDto {
+export class User {
   id: number
+  name: string
+  email: string
+  password: string
+}
+
+export class UserDto {
   name: string
   password: string
 }
@@ -31,6 +37,7 @@ export class TaskDto {
   text4: string
   timeout: number = 53
   ttl: number = 53
+  total: number = 1
 }
 
 export class Task {
@@ -48,4 +55,5 @@ export class Task {
   text4: string
   timeout: number
   ttl: number
+  total: number
 }

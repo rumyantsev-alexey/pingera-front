@@ -1,0 +1,19 @@
+
+<form name="form" (ngSubmit)="nu.form.valid" #nu="ngForm" novalidate>
+  <div [ngClass]="{ 'has-error': nu.submitted}">
+    <label for="name">Username</label>
+    <input type="text" name="name" [(ngModel)]="user.name" id="name" required />
+  </div>
+  <div [ngClass]="{ 'has-error': nu.submitted}">
+    <label for="password">Password</label>
+    <input type="password" name="password" [(ngModel)]="user.password" #password id="password" required />
+  </div>
+  <div [ngClass]="{ 'has-error': nu.submitted}">
+    <label for="email">Email</label>
+    <input type="email" name="email" [(ngModel)]="user.email" id="email" required />
+  </div>
+  <div>
+    <button [disabled]="!nu.form.valid" class="btn btn-info">Save new user</button><span>   </span>
+    <button class="btn btn-info" (click)="cancelNewUser()">Cancel</button>
+  </div>
+</form>

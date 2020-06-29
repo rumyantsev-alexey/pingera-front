@@ -13,6 +13,8 @@ import {FormsModule} from "@angular/forms";
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { NewuserComponent } from './newuser/newuser.component';
+import { ResultsComponent } from './results/results.component';
 
 const appRoutes: Routes =[
   { path: '', component: HomeComponent},
@@ -23,6 +25,8 @@ const appRoutes: Routes =[
   { path: 'newtask', component: NewtaskComponent},
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent},
+  { path: 'newuser', component: NewuserComponent},
+  { path: 'results', component: ResultsComponent},
   { path: '**', redirectTo: '' }
 ];
 
@@ -35,7 +39,9 @@ const appRoutes: Routes =[
     PingComponent,
     TracerouteComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    NewuserComponent,
+    ResultsComponent
   ],
   entryComponents: [
   ],
