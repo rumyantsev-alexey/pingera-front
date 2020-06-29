@@ -1,13 +1,13 @@
 export class Ping {
-  "successFlag": boolean
-  "timeoutFlag": boolean
-  "errorMessage": string
-  "throwable": string
-  "host": string
-  "size": number
-  "rtt": number
-  "ttl": number
-  "duration": number
+  successFlag: boolean
+  timeoutFlag: boolean
+  errorMessage: string
+  throwable: string
+  host: string
+  size: number
+  rtt: number
+  ttl: number
+  duration: number
 
 }
 

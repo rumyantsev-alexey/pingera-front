@@ -1,25 +1,35 @@
-<form (ngSubmit)="onPing(modal)" #pping="ngForm">
+<form (ngSubmit)="onPingToString(modal); pping.reset();" #pping="ngForm">
   <label for="host" class="col-form-label">Do ping:</label>
   <input type="text" class="host form-control" placeholder="Host" id="host" [(ngModel)]="host" required name="host"/>
   <label for="count" class="col-form-label"> Count:</label>
   <input type='number' class="cnt form-control" value='4' min="1" max="20" id="count" [(ngModel)]="count" required name="cnt"/>
-  <button class="btn btn-danger" type="submit" value="PING">
+  <button class="btn btn-danger" type="submit"  [disabled]="pping.invalid" name="But1">
     <span>Do IT!!!</span>
   </button>
-  <button class="btn btn-info" type="reset" value="PING" (click)="pping.reset();">
+  <button class="btn btn-info" type="reset" (click)="pping.reset();" name="But2">
     <span>Reset</span>
   </button>
 </form>
 
+
 <ng-template #modal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">Host:{{host}} count:{{count}}</h4>
+    <h4 class="modal-title">{{textheader}}</h4>
   </div>
   <div class="modal-body">
-    <div *ngFor="let p of ping">
-      <p>
-          {{p.duration}}
-      </p>
+    <div>
+        {{pings}}
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #modal2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{textheader}}</h4>
+  </div>
+  <div class="modal-body">
+    <div>
+      {{ping.toString()}}
     </div>
   </div>
 </ng-template>
