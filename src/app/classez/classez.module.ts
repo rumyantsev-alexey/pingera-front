@@ -37,7 +37,7 @@ export class TaskDto {
   text4: string
   timeout: number = 53
   ttl: number = 53
-  total: number = 1
+  total: number = 2
 }
 
 export class Task {
@@ -56,4 +56,5 @@ export class Task {
   timeout: number
   ttl: number
   total: number
+  actual: boolean
 }

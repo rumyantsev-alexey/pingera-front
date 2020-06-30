@@ -12,7 +12,8 @@
 </form>
 
 
-<ng-template #modal let-modal>
+<!-- modal windows which ping as string -->
+<ng-template #modal  let-modal>
   <div class="modal-header">
     <h4 class="modal-title">{{textheader}}</h4>
   </div>
@@ -23,6 +24,7 @@
   </div>
 </ng-template>
 
+<!-- modal windows which ping as array of objects -->
 <ng-template #modal2 let-modal>
   <div class="modal-header">
     <h4 class="modal-title">{{textheader}}</h4>
