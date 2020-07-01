@@ -25,7 +25,7 @@ export class UserDto {
 
 export class TaskDto {
   cnt: number = 2
-  date1: string
+  date1: string = new Date(new Date().getTime() + (10 * 60 * 1000)).toLocaleString()
   name1: string
   packetsize: number = 32
   sellist1: string = "pinger"
