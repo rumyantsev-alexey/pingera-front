@@ -10,15 +10,19 @@
     </tr>
     </thead>
     <tbody id="tbody">
-    <tr *ngFor="let task of tasks" class='clickable-row' (click)="openModalWindows(modal, task)">
+    <tr *ngFor="let task of tasks" class='clickable-row'>
       <td>{{task.sellist1}}</td>
       <td>{{task.text2}}</td>
       <td>{{task.date1 | date :'medium'}}</td>
       <td>{{task.text3 + " " + task.sellist2}}</td>
-      <button class="btn btn-light btn-sm" (click)="deleteTask(task.id)">Удалить</button>
+      <button class="btn btn-light" (click)="openModalWindows(modal, task)">View</button>
+      <button class="btn btn-light" (click)="deleteTask(task.id)">Delete</button>
     </tr>
     </tbody>
   </table>
+  <div *ngIf="tasks.length == 0">
+    List of actual tasks not found
+  </div>
 
 
   <ng-template #modal let-modal>
@@ -32,6 +36,15 @@
         to host {{currTask.text2}} at {{currTask.date1 | date :'medium'}}. Every {{currTask.text3}} {{currTask.sellist2}}. Total: {{currTask.total}} times.<br>
         With {{currTask.sellist3}} uses {{currTask.sellist4}} with attr {{currTask.text4}}.
       </p>
+      <button class="btn btn-light" (click)="openModalModalWindows(modal2)">View result</button>
+    </div>
+  </ng-template>
+
+  <ng-template #modal2 let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Task:{{currTask.name1}}</h4>
+    </div>
+    <div class="modal-body">
     </div>
   </ng-template>
 

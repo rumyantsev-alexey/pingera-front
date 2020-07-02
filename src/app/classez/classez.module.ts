@@ -1,3 +1,13 @@
+
+export  class SubTask {
+  id: number
+  task: Task
+  date: string
+  result: string
+  work: boolean
+  complete: boolean
+}
+
 export class Ping {
   successFlag: boolean
   timeoutFlag: boolean
@@ -10,6 +20,7 @@ export class Ping {
   duration: number
 
 }
+
 
 export class User {
   id: number

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Task} from "../classez/classez.module";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -22,13 +22,6 @@ export class ListComponent implements OnInit{
     this.getAllTasks()
   }
 
-  getTask(id: number) {
-    this.http.get<Task[]>('http://localhost:8080/getalltasks' + id)
-      .subscribe(t => {
-        this.tasks = t
-      })
-  }
-
   deleteTask(id: number) {
     let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
     this.http.delete<void>('http://localhost:8080/deletetask/' + id, {headers})
@@ -50,5 +43,9 @@ export class ListComponent implements OnInit{
   openModalWindows(modal, task: Task) {
     this.currTask = task
     this.modalService.open(modal, { centered: true})
+  }
+
+  openModalModalWindows(modal2) {
+     this.modalService.open(modal2, { centered: true})
   }
 }

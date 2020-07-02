@@ -1,1 +1,45 @@
-<p>results works!</p>
+<div class="container">
+  <table class="table table-hover" id="List">
+    <thead>
+    <tr *ngIf="CompleteTasks.length !== 0">
+      <th>Tools</th>
+      <th>Host</th>
+      <th>Begin</th>
+      <th>Every</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody id="tbody">
+    <tr *ngFor="let task of CompleteTasks" class='clickable-row' (click)="openModalWindows(modal, task)">
+      <td>{{task.sellist1}}</td>
+      <td>{{task.text2}}</td>
+      <td>{{task.date1 | date :'medium'}}</td>
+      <td>{{task.text3 + " " + task.sellist2}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <div *ngIf="CompleteTasks.length == 0">
+    List of complete tasks not found
+  </div>
+</div>
+
+<ng-template #modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{curTask.name1}}</h4>
+  </div>
+  <div class="modal-body">
+    <div>
+      <table class="table table-hover" id="List2" >
+        <thead>
+        <tr *ngIf="CompleteSubTasks.length !== 0">
+        </tr>
+        </thead>
+        <tbody id="tbody2">
+        <tr *ngFor="let subtask of CompleteSubTasks" class='clickable-row'>
+          <td>{{subtask.result}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-template>
