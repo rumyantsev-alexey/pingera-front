@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SubTask, Task, TaskDto} from "../classez/classez.module";
+import {SubTask, Task} from "../classez/classez.module";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 

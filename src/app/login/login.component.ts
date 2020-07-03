@@ -1,10 +1,8 @@
 ﻿import {Component, NgZone, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {UserDto} from "../classez/classez.module";
-import {UsersessionService} from "../usersession/usersession.service";
-import {delay} from "rxjs/operators";
+import {User} from "../classez/classez.module";
 
 @Component({
     selector: 'login',
@@ -13,13 +11,12 @@ import {delay} from "rxjs/operators";
 
 export class LoginComponent implements OnInit {
 
-    model: UserDto = new UserDto();
+    model: User = new User();
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private http: HttpClient,
-        private zone: NgZone
+        private http: HttpClient
     )
     { }
 

@@ -29,14 +29,10 @@ export class User {
   password: string
 }
 
-export class UserDto {
-  name: string
-  password: string
-}
-
-export class TaskDto {
+export class Task {
+  id:number
   cnt: number = 2
-  date1: string = new Date(new Date().getTime() + (10 * 60 * 1000)).toLocaleString()
+  date1: Date = new Date(new Date().getTime() + (10 * 60 * 1000))
   name1: string
   packetsize: number = 32
   sellist1: string = "pinger"
@@ -49,23 +45,5 @@ export class TaskDto {
   timeout: number = 53
   ttl: number = 53
   total: number = 2
-}
-
-export class Task {
-  id:number
-  cnt: number
-  date1: string
-  name1: string
-  packetsize: number
-  sellist1: string
-  sellist2: string
-  sellist3: string
-  sellist4: string
-  text2: string
-  text3: number
-  text4: string
-  timeout: number
-  ttl: number
-  total: number
   actual: boolean
 }

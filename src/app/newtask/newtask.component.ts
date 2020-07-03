@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {TaskDto} from "../classez/classez.module";
+import {Task} from "../classez/classez.module";
 import {Router} from "@angular/router";
 
 @Component({
@@ -9,19 +9,19 @@ import {Router} from "@angular/router";
   styleUrls: ['./newtask.component.css']
 })
 export class NewtaskComponent implements OnInit {
-  newtask: TaskDto;
+  newtask: Task;
 
   constructor(private http: HttpClient, private  router: Router) { }
 
   ngOnInit(): void {
-    this.newtask = new TaskDto()
+    this.newtask = new Task()
   }
 
   onSubmited(ntask) {
     if (sessionStorage.getItem('token') != null) {
       let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
 
-      this.http.post<TaskDto>('http://localhost:8080/posttask', this.newtask, {headers})
+      this.http.post<Task>('http://localhost:8080/posttask', this.newtask, {headers})
         .subscribe()
       ntask.reset()
       this.router.navigate(['list']);

@@ -12,7 +12,6 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 export class ListComponent implements OnInit{
   tasks: Task[] = []
-
   currTask: Task = new Task()
 
   constructor(private http: HttpClient, private modalService: NgbModal) {
