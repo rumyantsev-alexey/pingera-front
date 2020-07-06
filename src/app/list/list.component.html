@@ -1,5 +1,5 @@
 <div class="container">
-  <table class="table table-hover" id="List">
+  <table class="table" id="List">
     <thead>
     <tr *ngIf="tasks.length !== 0">
       <th>Tools</th>
@@ -43,9 +43,26 @@
 
   <ng-template #modal2 let-modal>
     <div class="modal-header">
-      <h4 class="modal-title">Task:{{currTask.name1}}</h4>
+      <h4 class="modal-title">{{currTask.name1}}</h4>
     </div>
     <div class="modal-body">
+      <div>
+        <table class="table table-hover" id="List2" *ngIf="CompleteSubTasks.length !== 0">
+          <thead>
+          <tr>
+            <th>Time</th>
+            <th>Result</th>
+          </tr>
+          </thead>
+          <tbody id="tbody2">
+          <tr *ngFor="let subtask of CompleteSubTasks" class='clickable-row'>
+            <td>{{subtask.date1 | date: 'medium'}}</td>
+            <td>{{subtask.result}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <p *ngIf="CompleteSubTasks.length == 0"> No result</p>
+      </div>
     </div>
   </ng-template>
 

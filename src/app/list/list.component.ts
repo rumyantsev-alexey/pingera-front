@@ -1,6 +1,6 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Task} from "../classez/classez.module";
+import {SubTask, Task} from "../classez/classez.module";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -13,6 +13,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 export class ListComponent implements OnInit{
   tasks: Task[] = []
   currTask: Task = new Task()
+  CompleteSubTasks: SubTask[] = []
 
   constructor(private http: HttpClient, private modalService: NgbModal) {
   }
@@ -45,6 +46,13 @@ export class ListComponent implements OnInit{
   }
 
   openModalModalWindows(modal2) {
+    if (sessionStorage.getItem('token') != null) {
+      let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
+      this.http.get<SubTask[]>('http://localhost:8080/getallcompletesubtasksfortask/' + this.currTask.id, {headers})
+        .subscribe( st =>
+          this.CompleteSubTasks = st
+        )
+    }
      this.modalService.open(modal2, { centered: true})
   }
 }

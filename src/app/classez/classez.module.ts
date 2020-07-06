@@ -2,7 +2,7 @@
 export  class SubTask {
   id: number
   task: Task
-  date: string
+  date1: string
   result: string
   work: boolean
   complete: boolean

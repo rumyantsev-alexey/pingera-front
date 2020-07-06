@@ -1,5 +1,5 @@
 <div class="container">
-  <table class="table table-hover" id="List">
+  <table class="table" id="List">
     <thead>
     <tr *ngIf="CompleteTasks.length !== 0">
       <th>Tools</th>
@@ -16,6 +16,8 @@
       <td>{{task.date1 | date :'medium'}}</td>
       <td>{{task.text3 + " " + task.sellist2}}</td>
       <td>{{task.total}}</td>
+      <button class="btn btn-light" (click)="openModalWindows(modal, task)">View</button>
+      <button class="btn btn-light" (click)="deleteTask(task.id)">Delete</button>
     </tr>
     </tbody>
   </table>
@@ -29,18 +31,38 @@
     <h4 class="modal-title">{{curTask.name1}}</h4>
   </div>
   <div class="modal-body">
+    <p>
+      Name task: {{curTask.name1}} id={{curTask.id}} <br>
+      Uses {{curTask.sellist1}} count={{curTask.cnt}} packetsize={{curTask.packetsize}} ttl={{curTask.ttl}} timeout={{curTask.timeout}}<br>
+      to host {{curTask.text2}} at {{curTask.date1 | date :'medium'}}. Every {{curTask.text3}} {{curTask.sellist2}}. Total: {{curTask.total}} times.<br>
+      With {{curTask.sellist3}} uses {{curTask.sellist4}} with attr {{curTask.text4}}.
+    </p>
+    <button class="btn btn-light" (click)="openModalModalWindows(modal2)">View result</button>
+  </div>
+</ng-template>
+
+<ng-template #modal2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{curTask.name1}}</h4>
+  </div>
+  <div class="modal-body">
     <div>
-      <table class="table table-hover" id="List2" >
+      <table class="table table-hover" id="List2" *ngIf="CompleteSubTasks.length !== 0">
         <thead>
-        <tr *ngIf="CompleteSubTasks.length !== 0">
+        <tr>
+          <th>Time</th>
+          <th>Result</th>
         </tr>
         </thead>
         <tbody id="tbody2">
         <tr *ngFor="let subtask of CompleteSubTasks" class='clickable-row'>
+          <td>{{subtask.date1 | date: 'medium'}}</td>
           <td>{{subtask.result}}</td>
         </tr>
         </tbody>
       </table>
+      <p *ngIf="CompleteSubTasks.length == 0"> No result</p>
     </div>
   </div>
 </ng-template>
+
