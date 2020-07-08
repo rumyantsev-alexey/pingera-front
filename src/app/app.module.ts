@@ -9,7 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { PingComponent } from './online/ping/ping.component';
 import { TracerouteComponent } from './online/traceroute/traceroute.component';
 import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -45,13 +45,14 @@ const appRoutes: Routes =[
   ],
   entryComponents: [
   ],
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot(appRoutes),
-    HttpClientModule,
-    FormsModule,
-    NgbModule
-  ],
+    imports: [
+        BrowserModule,
+        RouterModule.forRoot(appRoutes),
+        HttpClientModule,
+        FormsModule,
+        NgbModule,
+        ReactiveFormsModule
+    ],
   providers: [NgbActiveModal],
   bootstrap: [AppComponent]
 })

@@ -2,7 +2,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {User} from "../classez/classez.module";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 
 @Component({
     selector: 'login',
@@ -11,31 +11,38 @@ import {User} from "../classez/classez.module";
 
 export class LoginComponent implements OnInit {
 
-    model: User = new User();
+  loginForm: FormGroup
 
-    constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private http: HttpClient
-    )
-    { }
+  constructor(
+      private route: ActivatedRoute,
+      private router: Router,
+      private http: HttpClient
+  )
+  { }
 
-    ngOnInit() {
-    }
+  ngOnInit() {
+    this.loginForm = new FormGroup({
+      name: new FormControl(null, Validators.required),
+      pass: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(3)
+      ])
+    })
+  }
 
-    login() {
-        this.http.post<Observable<boolean>>('http://localhost:8080/login', {
-            name: this.model.name,
-            password: this.model.password
-        }).subscribe(isValid => {
-           if (isValid) {
-             sessionStorage.setItem('token', btoa(this.model.name + ':' + this.model.password))
-             this.router.navigate([''])
-            } else {
-              alert("(login) Authentication failed.")
-            }
-        });
-    }
+  login() {
+      this.http.post<Observable<boolean>>('http://localhost:8080/login', {
+          name: this.loginForm.value.name,
+          password: this.loginForm.value.pass
+      }).subscribe(isValid => {
+         if (isValid) {
+           sessionStorage.setItem('token', btoa(this.loginForm.value.name + ':' + this.loginForm.value.pass))
+           this.router.navigate([''])
+          } else {
+            alert("(login) Authentication failed.")
+          }
+      });
+  }
 
   createNewUser() {
     this.router.navigate(['newuser'])

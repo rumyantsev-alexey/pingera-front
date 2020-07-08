@@ -1,16 +1,31 @@
-﻿<form name="form" (ngSubmit)="fff.form.valid && login()" #fff="ngForm" novalidate>
-    <div [ngClass]="{ 'has-error': fff.submitted}">
+﻿<form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div >
         <label for="name">Username</label>
-        <input type="text" name="name" [(ngModel)]="model.name" id="name" required />
-    </div>
-    <div [ngClass]="{ 'has-error': fff.submitted}">
-        <label for="password">Password</label>
-        <input type="password" name="password" [(ngModel)]="model.password" #password id="password" required />
+        <input type="text" name="name" id="name"  formControlName="name"/>
+      <div class="valid" *ngIf="loginForm.get('name').invalid && loginForm.get('name').touched">
+        <small *ngIf="loginForm.get('name').errors.required">
+          Name don't enter empty <br>
+        </small>
+      </div>
     </div>
     <div>
-        <button [disabled]="!fff.form.valid" class="btn btn-info">Login as exist user</button>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" formControlName="pass"/>
+        <div class="valid" *ngIf="loginForm.get('pass').invalid && loginForm.get('pass').touched">
+          <small *ngIf="loginForm.get('pass').errors.required">
+            Password don't enter empty
+          </small>
+
+          <small *ngIf="loginForm.get('pass').errors.minlength">
+            Length may be not less {{loginForm.get('pass').errors.minlength.requiredLength}}.
+            Now count of letters {{loginForm.get('pass').errors.minlength.actualLength}}.
+          </small>
+        </div>
+    </div>
+    <div>
+        <button  class="btn btn-info" type="submit" [disabled]="loginForm.invalid">Login as exist user</button>
     </div>
 </form>
 <br>
 <br>
-<button class="btn btn-info" (click)="createNewUser()">New user</button>
+<button class="btn btn-info" type="button" (click)="createNewUser()">New user</button>
