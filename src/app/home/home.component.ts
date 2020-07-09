@@ -11,12 +11,9 @@ export class HomeComponent implements OnInit {
   public UserName: string
 
   constructor(private US:UsersessionService) {
-    console.log("Constuct Home...")
   }
 
     ngOnInit() {
-      console.log("ngOnInit Home...")
       this.UserName = this.US.getUserName()
-      console.log("(Home) Change cuName value on", this.US.getUserName())
     }
 }

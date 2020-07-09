@@ -52,12 +52,14 @@
         <tr>
           <th>Time</th>
           <th>Result</th>
+          <th>Success</th>
         </tr>
         </thead>
         <tbody id="tbody2">
         <tr *ngFor="let subtask of CompleteSubTasks" class='clickable-row'>
           <td>{{subtask.date1 | date: 'medium'}}</td>
           <td>{{subtask.result}}</td>
+          <td>{{subtask.successfully ? 'ok': 'no'}}</td>
         </tr>
         </tbody>
       </table>

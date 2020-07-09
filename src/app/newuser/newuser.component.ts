@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../classez/classez.module";
 import {Router} from "@angular/router";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
+import {Observable, throwError} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {catchError, retry} from "rxjs/operators";
 
 @Component({
   selector: 'app-newuser',
@@ -48,10 +49,27 @@ export class NewuserComponent implements OnInit {
     this.user.email = this.newUserForm.value.email
 
     this.http.post<Observable<void>>('http://localhost:8080/adduser', this.user, {headers}
-    ).subscribe()
+    )
+      .pipe(
+      catchError(this.handleError)
+    )
+      .subscribe()
   }
 
   cancelNewUser() {
     this.router.navigate(['login'])
   }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('(handleError) An error occurred:', error.error.message);
+    } else {
+      console.error(
+        `(handleError) Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    return throwError(
+      '(handleError) Something bad happened; please try again later.');
+  };
+
 }

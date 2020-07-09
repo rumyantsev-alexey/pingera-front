@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
       }).subscribe(isValid => {
          if (isValid) {
            sessionStorage.setItem('token', btoa(this.loginForm.value.name + ':' + this.loginForm.value.pass))
+           window.location.reload()
            this.router.navigate([''])
           } else {
             alert("(login) Authentication failed.")

@@ -12,10 +12,12 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class NewtaskComponent implements OnInit {
 
   newTaskForm: FormGroup
+  visibleOption: boolean
 
   constructor(private http: HttpClient, private  router: Router) { }
 
   ngOnInit(): void {
+    this.visibleOption = false
     this.newTaskForm = new FormGroup({
       cnt: new FormControl(2,[
         Validators.required
@@ -74,4 +76,7 @@ export class NewtaskComponent implements OnInit {
     }
   }
 
+  clickOptions() {
+    this.visibleOption=!this.visibleOption
+  }
 }

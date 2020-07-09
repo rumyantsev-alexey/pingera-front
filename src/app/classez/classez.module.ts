@@ -6,6 +6,7 @@ export  class SubTask {
   result: string
   work: boolean
   complete: boolean
+  successfully: boolean
 }
 
 export class Ping {

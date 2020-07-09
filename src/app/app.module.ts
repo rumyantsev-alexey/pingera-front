@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ListComponent } from './list/list.component';
+import { ListComponent } from './listtask/list.component';
 import { NewtaskComponent } from './newtask/newtask.component';
 import {RouterModule, Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
