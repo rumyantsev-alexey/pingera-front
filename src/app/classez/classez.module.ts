@@ -1,11 +1,6 @@
-
-export  class SubTask {
-  id: number
-  task: Task
+export  class SubTaskDto {
   date1: string
   result: string
-  work: boolean
-  complete: boolean
   successfully: boolean
 }
 

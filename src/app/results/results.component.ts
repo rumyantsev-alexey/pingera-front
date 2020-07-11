@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SubTask, Task} from "../classez/classez.module";
+import {SubTaskDto, Task} from "../classez/classez.module";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
@@ -10,7 +10,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class ResultsComponent implements OnInit {
   CompleteTasks: Task[] = []
-  CompleteSubTasks: SubTask[] = []
+  CompleteSubTasks: SubTaskDto[] = []
   curTask: Task = new Task()
 
   constructor(private http: HttpClient, private modalService: NgbModal) { }
@@ -34,7 +34,7 @@ export class ResultsComponent implements OnInit {
     this.curTask = task
     if (sessionStorage.getItem('token') != null) {
       let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
-      this.http.get<SubTask[]>('http://localhost:8080/getallcompletesubtasksfortask/' + task.id, {headers})
+      this.http.get<SubTaskDto[]>('http://localhost:8080/getallcompletesubtasksfortask/' + task.id, {headers})
         .subscribe( st =>
           this.CompleteSubTasks = st
         )
@@ -51,7 +51,7 @@ export class ResultsComponent implements OnInit {
   openModalModalWindows(modal2) {
     if (sessionStorage.getItem('token') != null) {
       let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
-      this.http.get<SubTask[]>('http://localhost:8080/getallcompletesubtasksfortask/' + this.curTask.id, {headers})
+      this.http.get<SubTaskDto[]>('http://localhost:8080/getallcompletesubtasksfortask/' + this.curTask.id, {headers})
         .subscribe( st => {
             this.CompleteSubTasks = st
             console.log(this.CompleteSubTasks)
