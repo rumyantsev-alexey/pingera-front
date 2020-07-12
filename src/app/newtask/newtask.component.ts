@@ -13,11 +13,22 @@ export class NewtaskComponent implements OnInit {
 
   newTaskForm: FormGroup
   visibleOption: boolean
+  tools: string[]
+  toolHeadlers: string[]
 
   constructor(private http: HttpClient, private  router: Router) { }
 
   ngOnInit(): void {
     this.visibleOption = false
+
+    if (sessionStorage.getItem('token') != null ) {
+      let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
+      this.http.get<string[]>('http://localhost:8080/gettools',  {headers})
+        .subscribe( (s) => this.tools = s )
+      this.http.get<string[]>('http://localhost:8080/gettoolhandlers',  {headers})
+        .subscribe( (s) => this.toolHeadlers = s )
+    }
+
     this.newTaskForm = new FormGroup({
       cnt: new FormControl(2,[
         Validators.required
@@ -31,7 +42,7 @@ export class NewtaskComponent implements OnInit {
       packetsize: new FormControl(32,[
         Validators.required
       ]),
-      sellist1: new FormControl("pinger",[
+      sellist1: new FormControl("ping",[
         Validators.required
       ]),
       sellist2: new FormControl("hrs",[
