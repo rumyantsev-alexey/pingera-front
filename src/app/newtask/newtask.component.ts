@@ -33,7 +33,7 @@ export class NewtaskComponent implements OnInit {
       cnt: new FormControl(2,[
         Validators.required
       ]),
-      date1: new FormControl(new Date(new Date().getTime() + (3 * 60 * 1000)),[
+      date1: new FormControl(new Date(new Date().getTime() + (2 * 60 * 1000)),[
         Validators.required
       ]),
       name1: new FormControl(null,[
@@ -60,9 +60,10 @@ export class NewtaskComponent implements OnInit {
       text3: new FormControl(1,[
         Validators.required
       ]),
-      text4: new FormControl(null,[
-        Validators.required,
-        Validators.email
+      text4: new FormControl(null),
+
+      account: new FormControl(true,[
+        Validators.required
       ]),
       timeout: new FormControl(53,[
         Validators.required
@@ -84,8 +85,7 @@ export class NewtaskComponent implements OnInit {
         .subscribe()
       this.newTaskForm.reset()
       this.router.navigate(['list']);
-    }
-  }
+    }   }
 
   clickOptions() {
     this.visibleOption=!this.visibleOption
