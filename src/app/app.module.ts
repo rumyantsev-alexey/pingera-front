@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NewuserComponent } from './newuser/newuser.component';
 import { ResultsComponent } from './results/results.component';
+import { EdituserComponent } from './edituser/edituser.component';
 
 const appRoutes: Routes =[
   { path: '', component: HomeComponent},
@@ -26,6 +27,7 @@ const appRoutes: Routes =[
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent},
   { path: 'newuser', component: NewuserComponent},
+  { path: 'edituser', component: EdituserComponent},
   { path: 'results', component: ResultsComponent},
   { path: '**', redirectTo: '' }
 ];
@@ -41,7 +43,8 @@ const appRoutes: Routes =[
     LoginComponent,
     LogoutComponent,
     NewuserComponent,
-    ResultsComponent
+    ResultsComponent,
+    EdituserComponent
   ],
   entryComponents: [
   ],

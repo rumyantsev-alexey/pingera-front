@@ -27,5 +27,21 @@
     </div>
 </form>
 <br>
+<button  class="btn btn-info" type="button" [disabled]="!loginUser" (click)="viewUser(modal)">View current login user</button>
+<button  class="btn btn-info" type="button" [disabled]="!loginUser" (click)="editUser()">Edit current login user</button>
+<br>
 <br>
 <button class="btn btn-info" type="button" (click)="createNewUser()">New user</button>
+
+<ng-template #modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Current login user:</h4>
+  </div>
+  <div class="modal-body">
+    <div>
+      Name: {{this.currentUser.name}} <br>
+      Email: {{this.currentUser.email}} <br>
+      ChatId: {{this.currentUser.chatid}} <br>
+    </div>
+  </div>
+</ng-template>

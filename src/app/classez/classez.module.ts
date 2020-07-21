@@ -23,6 +23,7 @@ export class User {
   name: string
   email: string
   password: string
+  chatid: string
 }
 
 export class Task {

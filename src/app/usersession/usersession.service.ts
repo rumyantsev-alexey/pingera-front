@@ -11,10 +11,10 @@ export class UsersessionService implements OnInit {
 
   constructor(private http: HttpClient) {
     this.User = new User()
-    if (sessionStorage.getItem('token') != null) {
-      this.User.name = atob(sessionStorage.getItem('token')).split(':')[0]
-      this.User.password = atob(sessionStorage.getItem('token')).split(':')[1]
+    if (sessionStorage.getItem('uuser') != null) {
+      this.User = JSON.parse(sessionStorage.getItem('uuser'))
     } else {
+      this.User = new User()
       this.User.name = "none"
       this.User.password = "none"
     }
@@ -23,8 +23,8 @@ export class UsersessionService implements OnInit {
   ngOnInit(): void {
    }
 
-  public getUserName(): string {
-    return this.User.name
+  public getUser(): User {
+    return this.User
   }
 
 }

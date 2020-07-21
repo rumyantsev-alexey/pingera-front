@@ -1,59 +1,68 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../classez/classez.module";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {catchError, retry} from "rxjs/operators";
+import {catchError} from "rxjs/operators";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {UsersessionService} from "../usersession/usersession.service";
 
 @Component({
-  selector: 'app-newuser',
-  templateUrl: './newuser.component.html',
+  selector: 'app-edituser',
+  templateUrl: './edituser.component.html',
 })
-export class NewuserComponent implements OnInit {
+export class EdituserComponent implements OnInit {
 
   // todo избавиться от User
   user: User
   newUserForm: FormGroup
 
+
   constructor(
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private US:UsersessionService
+
   ) { }
 
   ngOnInit(): void {
-    this.user = new User()
+    this.user = this.US.getUser()
     this.newUserForm = new FormGroup({
-      name: new FormControl(null, Validators.required),
-      pass: new FormControl(null, [
+      name: new FormControl({value: this.user.name, disabled: true}, Validators.required),
+      pass: new FormControl(this.user.password, [
         Validators.required,
         Validators.minLength(3)
       ]),
-      email: new FormControl(null, [
+      email: new FormControl(this.user.email, [
         Validators.required,
         Validators.email
       ]),
-      chatid: new FormControl(null)
+      chatid: new FormControl(this.user.chatid)
     })
+
   }
+
 
   validSave() {
     let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
 
 //todo password dont send in newUserForm
 
-    this.user.name = this.newUserForm.value.name
+    this.user.name = this.US.getUser().name
     this.user.password = this.newUserForm.value.pass
 
     this.user.email = this.newUserForm.value.email
     this.user.chatid = this.newUserForm.value.chatid
 
-    this.http.post<Observable<void>>('http://localhost:8080/adduser', this.user, {headers}
+    this.http.post<Observable<void>>('http://localhost:8080/modifyuser', this.user, {headers}
     )
       .pipe(
-      catchError(this.handleError)
-    )
+        catchError(this.handleError)
+      )
       .subscribe()
+    sessionStorage.setItem('uuser', JSON.stringify(this.user))
+    this.router.navigate(['login'])
   }
 
   cancelNewUser() {
@@ -73,3 +82,4 @@ export class NewuserComponent implements OnInit {
   };
 
 }
+
