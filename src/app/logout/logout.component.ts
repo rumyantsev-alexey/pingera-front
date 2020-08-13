@@ -1,5 +1,6 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {UsersessionService} from "../usersession/usersession.service";
 
 @Component({
   selector: 'app-logout',
@@ -8,11 +9,13 @@ import {Router} from "@angular/router";
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(
+    private router:Router,
+    private US: UsersessionService
+  ) { }
 
   ngOnInit(): void {
-    sessionStorage.setItem('token', '');
-    sessionStorage.clear()
+    this.US.delLoginUser()
     this.router.navigate(['']);
   }
 

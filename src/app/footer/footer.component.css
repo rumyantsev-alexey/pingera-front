@@ -1,0 +1,10 @@
+footer {
+  background: linear-gradient(to left,rgba(54,194,182,0.96) 0,rgba(62,188,207,0.96) 100%);
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+  color: #fff;
+  display: block;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}

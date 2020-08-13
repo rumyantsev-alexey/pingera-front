@@ -8,12 +8,9 @@ import {UsersessionService} from "./usersession/usersession.service";
 })
 export class AppComponent implements OnInit{
 
-  public UserName: string
-
-  constructor(public  US:UsersessionService) {
+  constructor() {
  }
 
   ngOnInit() {
-    this.UserName = this.US.getUser().name
   }
 }

@@ -13,9 +13,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
-import { NewuserComponent } from './newuser/newuser.component';
 import { ResultsComponent } from './results/results.component';
-import { EdituserComponent } from './edituser/edituser.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 const appRoutes: Routes =[
   { path: '', component: HomeComponent},
@@ -26,8 +26,6 @@ const appRoutes: Routes =[
   { path: 'newtask', component: NewtaskComponent},
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent},
-  { path: 'newuser', component: NewuserComponent},
-  { path: 'edituser', component: EdituserComponent},
   { path: 'results', component: ResultsComponent},
   { path: '**', redirectTo: '' }
 ];
@@ -42,9 +40,9 @@ const appRoutes: Routes =[
     TracerouteComponent,
     LoginComponent,
     LogoutComponent,
-    NewuserComponent,
     ResultsComponent,
-    EdituserComponent
+    HeaderComponent,
+    FooterComponent,
   ],
   entryComponents: [
   ],

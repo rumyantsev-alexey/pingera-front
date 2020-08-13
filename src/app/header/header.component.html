@@ -1,0 +1,70 @@
+
+<header>
+  <span>  user: </span>{{UserName}}
+  <nav role="navigation">
+    <ul>
+      <li>
+        <a href="/">
+          <div>
+            Home
+            <span>Home sweet home</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/online">
+          <div>
+            Online
+            <span>Online services</span>
+          </div>
+        </a>
+        <div>
+          <ul>
+            <li><a href="/online/ping">Ping</a></li>
+            <li><a href="/online/traceroute">Traceroute</a></li>
+          </ul>
+        </div>
+      </li>
+      <li *ngIf='UserName != "none"'>
+        <a href="/list">
+          <div>
+            List actual tasks
+            <span>List sheduler current users actual tasks</span>
+          </div>
+        </a>
+      </li>
+      <li *ngIf='UserName != "none"'>
+        <a href="/results">
+          <div>
+            Last complete tasks
+            <span>Show results last complete tasks</span>
+          </div>
+        </a>
+      </li>
+      <li *ngIf='UserName != "none"'>
+        <a href="/newtask">
+          <div>
+            New task
+            <span>Create new task for current user</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="/login">
+          <div>
+            Log in
+            <span>Enter exist user</span>
+          </div>
+        </a>
+      </li>
+      <li *ngIf='UserName != "none"'>
+        <a href="/logout">
+          <div>
+            Log out
+            <span>Exit exist user</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

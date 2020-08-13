@@ -18,14 +18,6 @@ export class Ping {
 }
 
 
-export class User {
-  id: number
-  name: string
-  email: string
-  password: string
-  chatid: string
-}
-
 export class Task {
   id:number
   cnt: number

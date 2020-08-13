@@ -1,11 +1,9 @@
 ﻿import {Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable } from 'rxjs';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UsersessionService} from "../usersession/usersession.service";
-import {User} from "../classez/classez.module";
 
 @Component({
     selector: 'login',
@@ -16,7 +14,6 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup
   loginUser: boolean
-  currentUser: User
 
   constructor(
       private route: ActivatedRoute,
@@ -36,38 +33,20 @@ export class LoginComponent implements OnInit {
       ])
     })
     this.loginUser = sessionStorage.getItem('token') != null
-    this.currentUser = new User()
   }
 
   login() {
-      this.http.post<User>('http://localhost:8080/getuser', {
-          name: this.loginForm.value.name,
-          password: this.loginForm.value.pass
+      this.http.post<boolean>('http://localhost:8080/login', {
+        name: this.loginForm.value.name,
+        password: this.loginForm.value.pass
       }).subscribe(x => {
-         if (x != null) {
-           this.currentUser = x
-           sessionStorage.setItem('token', btoa(this.loginForm.value.name + ':' + this.loginForm.value.pass))
-           sessionStorage.setItem('uuser', JSON.stringify(this.currentUser))
+         if (x) {
+           this.US.setToken(this.loginForm.value.name, this.loginForm.value.pass)
            window.location.reload()
-           this.router.navigate([''])
-          } else {
+//           this.router.navigate(['']);
+         } else {
             alert("(login) Authentication failed.")
           }
       });
-  }
-
-  createNewUser() {
-    this.router.navigate(['newuser'])
-    }
-
-  viewUser(modal) {
-    if (sessionStorage.getItem('token') != null) {
-      this.currentUser = this.US.getUser()
-      this.modalService.open(modal, { centered: true})
-    }
-  }
-
-  editUser() {
-    this.router.navigate(['edituser'])
   }
 }
