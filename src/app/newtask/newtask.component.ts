@@ -24,72 +24,92 @@ export class NewtaskComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.visibleOption = false
+    this.goAll()
+  }
+
+  goAll() {
+    if (this.US.isLogin()) {
+      this.visibleOption = false
 
       let headers: HttpHeaders = this.US.getAuthHeader()
-      this.http.get<string[]>('http://localhost:8080/gettools',  {headers})
-        .subscribe( (s) => this.tools = s )
-      this.http.get<string[]>('http://localhost:8080/gettoolhandlers',  {headers})
-        .subscribe( (s) => this.toolHeadlers = s )
+      this.http.get<string[]>('http://localhost:8080/gettools', {headers})
+        .subscribe((s) => this.tools = s)
+      this.http.get<string[]>('http://localhost:8080/gettoolhandlers', {headers})
+        .subscribe((s) => this.toolHeadlers = s)
 
-    // todo обработка ошибок га сервере
+      // todo обработка ошибок га сервере
 
 
-    this.newTaskForm = new FormGroup({
-      cnt: new FormControl(2,[
-        Validators.required
-      ]),
-      date1: new FormControl(new Date(new Date().getTime() + (2 * 60 * 1000)),[
-        Validators.required
-      ]),
-      name1: new FormControl(null,[
-        Validators.required
-      ]),
-      packetsize: new FormControl(32,[
-        Validators.required
-      ]),
-      sellist1: new FormControl("ping",[
-        Validators.required
-      ]),
-      sellist2: new FormControl("hrs",[
-        Validators.required
-      ]),
-      sellist3: new FormControl("result=all",[
-        Validators.required
-      ]),
-      sellist4: new FormControl("email",[
-        Validators.required
-      ]),
-      text2: new FormControl(null,[
-        Validators.required
-      ]),
-      text3: new FormControl(1,[
-        Validators.required
-      ]),
-      text4: new FormControl({value:this.US.getLastEmail(), disabled: true}),
+      this.newTaskForm = new FormGroup({
+        cnt: new FormControl(2, [
+          Validators.required
+        ]),
+        date1: new FormControl(new Date(new Date().getTime() + (2 * 60 * 1000)), [
+          Validators.required
+        ]),
+        name1: new FormControl(null, [
+          Validators.required
+        ]),
+        packetsize: new FormControl(32, [
+          Validators.required
+        ]),
+        sellist1: new FormControl("ping", [
+          Validators.required
+        ]),
+        sellist2: new FormControl("hrs", [
+          Validators.required
+        ]),
+        sellist3: new FormControl("result=all", [
+          Validators.required
+        ]),
+        sellist4: new FormControl("email", [
+          Validators.required
+        ]),
+        text2: new FormControl(null, [
+          Validators.required
+        ]),
+        text3: new FormControl(1, [
+          Validators.required
+        ]),
+        text4: new FormControl({value: this.US.getLastEmail(), disabled: true}),
 
-      account: new FormControl(true,[
-        Validators.required
-      ]),
-      timeout: new FormControl(53,[
-        Validators.required
-      ]),
-      ttl: new FormControl(53,[
-        Validators.required
-      ]),
-      total: new FormControl(2,[
-        Validators.required
-      ])
-    })
+        account: new FormControl(true, [
+          Validators.required
+        ]),
+        timeout: new FormControl(53, [
+          Validators.required
+        ]),
+        ttl: new FormControl(53, [
+          Validators.required
+        ]),
+        total: new FormControl(2, [
+          Validators.required
+        ])
+      })
+    }
   }
 
   onSubmited() {
-      let headers: HttpHeaders = this.US.getAuthHeader()
+    let headers: HttpHeaders = this.US.getAuthHeader()
 
-      this.http.post<Task>('http://localhost:8080/posttask', this.newTaskForm.value, {headers})
-        .subscribe()
-      this.newTaskForm.reset()
-      this.router.navigate(['list']);
+    this.http.post<Task>('http://localhost:8080/posttask', this.newTaskForm.value, {headers})
+      .subscribe()
+
+    switch(this.newTaskForm.get('sellist4').value) {
+      case 'email': {
+        this.US.setProp(this.newTaskForm.get('text4').value, sessionStorage.getItem('lastchata'))
+        break;
+      }
+      case 'telegramm': {
+        this.US.setProp(sessionStorage.getItem('lastemaila'), this.newTaskForm.get('text4').value)
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+    this.newTaskForm.reset()
+    this.router.navigate(['list']);
    }
 
   clickOptions() {
@@ -105,13 +125,18 @@ export class NewtaskComponent implements OnInit {
   }
 
   onChangeResult() {
-    let x: string = this.newTaskForm.get('sellist4').value
     let res: string
-    if (x == 'email') {
-      res = this.US.getLastEmail()
-    } else {
-      if (x == 'telegramm') {
+    switch(this.newTaskForm.get('sellist4').value) {
+      case 'email': {
+        res = this.US.getLastEmail()
+        break;
+      }
+      case 'telegramm': {
         res = this.US.getLastChat()
+        break;
+      }
+      default: {
+        break;
       }
     }
     this.newTaskForm.patchValue({

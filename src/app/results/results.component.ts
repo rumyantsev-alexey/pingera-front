@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SubTaskDto, Task} from "../classez/classez.module";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {UsersessionService} from "../usersession/usersession.service";
 
 @Component({
   selector: 'app-results',
@@ -13,15 +14,19 @@ export class ResultsComponent implements OnInit {
   CompleteSubTasks: SubTaskDto[] = []
   curTask: Task = new Task()
 
-  constructor(private http: HttpClient, private modalService: NgbModal) { }
+  constructor(
+    private http: HttpClient,
+    private modalService: NgbModal,
+    private US: UsersessionService
+  ) { }
 
   ngOnInit(): void {
     this.getAllTasks()
   }
 
   getAllTasks() {
-    if (sessionStorage.getItem('token') != null) {
-      let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
+    if (this.US.isLogin()) {
+      let headers: HttpHeaders = this.US.getAuthHeader()
 
       this.http.get<Task[]>('http://localhost:8080/getallcompletetasksforauthuser', {headers})
         .subscribe(t => {

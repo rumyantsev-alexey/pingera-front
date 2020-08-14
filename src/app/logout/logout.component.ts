@@ -15,8 +15,14 @@ export class LogoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.US.delLoginUser()
-    this.router.navigate(['']);
+    this.goAll()
+  }
+
+  goAll() {
+    if (this.US.isLogin()) {
+      this.US.delLoginUser()
+      this.router.navigate(['']);
+    }
   }
 
 }
