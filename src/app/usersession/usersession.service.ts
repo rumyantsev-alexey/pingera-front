@@ -23,15 +23,25 @@ export class UsersessionService implements OnInit {
   }
 
   public setToken(name: string, pass: string) {
-    console.log(name)
-    sessionStorage.setItem('tokena', btoa(name + ':' + pass))
-    console.log(sessionStorage.getItem('tokena'))
-    console.log(this.getUserName())
+     sessionStorage.setItem('tokena', btoa(name + ':' + pass))
+  }
+
+  public setProp(lastemail: string, lastchat: string) {
+    sessionStorage.setItem('lastemaila', lastemail)
+    sessionStorage.setItem('lastchata', lastchat)
+  }
+
+  public  getLastEmail() {
+    return this.isLogin()?sessionStorage.getItem('lastemaila'): null
+  }
+
+  public  getLastChat() {
+    return this.isLogin()? sessionStorage.getItem('lastchata'): null
   }
 
   public getAuthHeader(): HttpHeaders {
     let result: HttpHeaders = null
-    if (sessionStorage.getItem('tokena') != null ) {
+    if (this.isLogin()) {
       result = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('tokena')})
     }
     return result;
@@ -41,4 +51,10 @@ export class UsersessionService implements OnInit {
     sessionStorage.clear()
   }
 
+  public isLogin() {
+    return sessionStorage.getItem('tokena') != null
+  }
+
+
+  // todo последние емейл и чатайди получать
 }

@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UsersessionService} from "../usersession/usersession.service";
+import {User} from "../classez/classez.module";
 
 @Component({
     selector: 'login',
@@ -36,14 +37,14 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-      this.http.post<boolean>('http://localhost:8080/login', {
+      this.http.post<User>('http://localhost:8080/login', {
         name: this.loginForm.value.name,
         password: this.loginForm.value.pass
       }).subscribe(x => {
-         if (x) {
+         if (x != null ) {
            this.US.setToken(this.loginForm.value.name, this.loginForm.value.pass)
-           window.location.reload()
-//           this.router.navigate(['']);
+           this.US.setProp(x.lastemail, x.lastchatid)
+           this.router.navigate(['']);
          } else {
             alert("(login) Authentication failed.")
           }

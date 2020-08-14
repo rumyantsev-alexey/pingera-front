@@ -8,12 +8,11 @@ import {UsersessionService} from "../usersession/usersession.service";
 })
 export class HeaderComponent implements OnInit {
 
-  public UserName: string
-
-  constructor(public  US:UsersessionService) { }
-
-  ngOnInit(): void {
-    this.UserName = this.US.getUserName()
+  constructor(
+    public  US:UsersessionService,
+  ) {
   }
 
+  ngOnInit(): void {
+  }
 }

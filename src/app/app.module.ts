@@ -12,10 +12,10 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
 import { ResultsComponent } from './results/results.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import {LogoutComponent} from "./logout/logout.component";
 
 const appRoutes: Routes =[
   { path: '', component: HomeComponent},
@@ -39,10 +39,10 @@ const appRoutes: Routes =[
     PingComponent,
     TracerouteComponent,
     LoginComponent,
-    LogoutComponent,
     ResultsComponent,
     HeaderComponent,
     FooterComponent,
+    LogoutComponent
   ],
   entryComponents: [
   ],

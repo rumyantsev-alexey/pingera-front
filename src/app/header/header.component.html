@@ -1,6 +1,6 @@
 
 <header>
-  <span>  user: </span>{{UserName}}
+  <span>  user: </span>{{US.getUserName()}}
   <nav role="navigation">
     <ul>
       <li>
@@ -25,7 +25,7 @@
           </ul>
         </div>
       </li>
-      <li *ngIf='UserName != "none"'>
+      <li *ngIf='US.getUserName() != "none"'>
         <a href="/list">
           <div>
             List actual tasks
@@ -33,7 +33,7 @@
           </div>
         </a>
       </li>
-      <li *ngIf='UserName != "none"'>
+      <li *ngIf='US.getUserName() != "none"'>
         <a href="/results">
           <div>
             Last complete tasks
@@ -41,7 +41,7 @@
           </div>
         </a>
       </li>
-      <li *ngIf='UserName != "none"'>
+      <li *ngIf='US.getUserName() != "none"'>
         <a href="/newtask">
           <div>
             New task
@@ -57,7 +57,7 @@
           </div>
         </a>
       </li>
-      <li *ngIf='UserName != "none"'>
+      <li *ngIf='US.getUserName() != "none"'>
         <a href="/logout">
           <div>
             Log out

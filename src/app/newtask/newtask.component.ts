@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Task} from "../classez/classez.module";
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {UsersessionService} from "../usersession/usersession.service";
 
 @Component({
   selector: 'app-newtask',
@@ -16,18 +17,23 @@ export class NewtaskComponent implements OnInit {
   tools: string[]
   toolHeadlers: string[]
 
-  constructor(private http: HttpClient, private  router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private  router: Router,
+    private US: UsersessionService
+  ) { }
 
   ngOnInit(): void {
     this.visibleOption = false
 
-    if (sessionStorage.getItem('token') != null ) {
-      let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
+      let headers: HttpHeaders = this.US.getAuthHeader()
       this.http.get<string[]>('http://localhost:8080/gettools',  {headers})
         .subscribe( (s) => this.tools = s )
       this.http.get<string[]>('http://localhost:8080/gettoolhandlers',  {headers})
         .subscribe( (s) => this.toolHeadlers = s )
-    }
+
+    // todo обработка ошибок га сервере
+
 
     this.newTaskForm = new FormGroup({
       cnt: new FormControl(2,[
@@ -60,7 +66,7 @@ export class NewtaskComponent implements OnInit {
       text3: new FormControl(1,[
         Validators.required
       ]),
-      text4: new FormControl(null),
+      text4: new FormControl({value:this.US.getLastEmail(), disabled: true}),
 
       account: new FormControl(true,[
         Validators.required
@@ -78,16 +84,39 @@ export class NewtaskComponent implements OnInit {
   }
 
   onSubmited() {
-    if (sessionStorage.getItem('token') != null ) {
-      let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
+      let headers: HttpHeaders = this.US.getAuthHeader()
 
       this.http.post<Task>('http://localhost:8080/posttask', this.newTaskForm.value, {headers})
         .subscribe()
       this.newTaskForm.reset()
       this.router.navigate(['list']);
-    }   }
+   }
 
   clickOptions() {
     this.visibleOption=!this.visibleOption
   }
+
+  onChange() {
+    if (this.newTaskForm.get('account').value) {
+      this.newTaskForm.get('text4').disable();
+    } else {
+      this.newTaskForm.get('text4').enable();
+    }
+  }
+
+  onChangeResult() {
+    let x: string = this.newTaskForm.get('sellist4').value
+    let res: string
+    if (x == 'email') {
+      res = this.US.getLastEmail()
+    } else {
+      if (x == 'telegramm') {
+        res = this.US.getLastChat()
+      }
+    }
+    this.newTaskForm.patchValue({
+      text4: res
+    });
+  }
+
 }

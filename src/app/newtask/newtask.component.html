@@ -1,11 +1,67 @@
 <form (ngSubmit)="onSubmited()" [formGroup]="newTaskForm">
-  <label for="name1">Name task:</label><span>&nbsp;</span><input type="text" id="name1" name="name1" formControlName="name1"/><br>
-  <label for="sel1">Uses</label><span>&nbsp;</span><select id="sel1" name="sellist1" formControlName="sellist1"><option [value]="tool" *ngFor="let tool of tools">{{tool}}</option></select><a (click)="clickOptions()">  (click here for more options)</a><br>
+  <label for="name1">Name task:</label>
+  <span>&nbsp;</span>
+  <input type="text" id="name1" name="name1" formControlName="name1"/>
+  <br>
+  <label for="sel1">Uses</label>
+  <span>&nbsp;</span>
+  <select id="sel1" name="sellist1" formControlName="sellist1">
+    <option [value]="tool" *ngFor="let tool of tools">{{tool}}</option>
+  </select>
+  <a (click)="clickOptions()">  (click here for more options)</a>
+  <br>
   <div *ngIf="this.visibleOption">
-  <label for="cnt"  *ngIf="newTaskForm.value.sellist1 == 'ping'">cnt=</label><span>&nbsp;</span><input  *ngIf="newTaskForm.value.sellist1 == 'ping'" type="number" value="2" min="1" id="cnt" name="cnt" formControlName="cnt" style="width:10%"><label for="packetsize"> packetsize=</label><span>&nbsp;</span><input type="number" value="32" min="1" id="packetsize" name="packetsize" formControlName="packetsize" style="width:10%"><label for="ttl"> ttl=</label><span>&nbsp;</span><input type="number" value="53" min="1" id="ttl" name="ttl" formControlName="ttl" style="width:10%"><label for="timeout"> timeout=</label><span>&nbsp;</span><input type="number" value="53" min="1" id="timeout" name="timeout" formControlName="timeout" style="width:10%"><br>
+    <label for="cnt"  *ngIf="newTaskForm.value.sellist1 == 'ping'">cnt=</label>
+    <span>&nbsp;</span>
+    <input  *ngIf="newTaskForm.value.sellist1 == 'ping'" type="number" value="2" min="1" id="cnt" name="cnt" formControlName="cnt" style="width:10%">
+    <label for="packetsize"> packetsize=</label>
+    <span>&nbsp;</span>
+    <input type="number" value="32" min="1" id="packetsize" name="packetsize" formControlName="packetsize" style="width:10%">
+    <label for="ttl"> ttl=</label>
+    <span>&nbsp;</span>
+    <input type="number" value="53" min="1" id="ttl" name="ttl" formControlName="ttl" style="width:10%">
+    <label for="timeout"> timeout=</label>
+    <span>&nbsp;</span>
+    <input type="number" value="53" min="1" id="timeout" name="timeout" formControlName="timeout" style="width:10%">
+    <br>
   </div>
-  <label for="host2">to host</label><span>&nbsp;</span><input type="text" id="host2" name="text2" formControlName="text2"><span>&nbsp;</span><label for="date1">at local time:</label><span>&nbsp;</span><input type="datetime-local" id="date1" name="date1" formControlName="date1"><label for="num">. Every </label><span>&nbsp;</span><input type="number" value="1" min="1" id="num" name="text3" formControlName="text3" style="width:10%"> <select id="sel2" name="sellist2" formControlName="sellist2"><option>yrs</option><option>mns</option><option>wks</option><option>days</option><option selected>hrs</option><option>mins</option></select>. Total: <input type="number" value="1" min="1" id="total" name="total" formControlName="total" style="width:10%"> times.<br>
-  <label for="sel3">With</label><span>&nbsp;</span><select id="sel3" name="sellist3" formControlName="sellist3"><option selected>result=all</option><option>result>60</option></select><span>&nbsp;</span><label for="sel4">uses</label><span>&nbsp;</span><select id="sel4" name="sellist4" formControlName="sellist4"><option [value]="tool" *ngFor="let tool of toolHeadlers">{{tool}}</option></select><span>&nbsp;</span><input type="checkbox"  formControlName="account"/><span>Uses account data</span><input *ngIf="!newTaskForm.value.account" type="text" id="host3" name="text4" formControlName="text4"><br>
+  <label for="host2">to host</label>
+  <span>&nbsp;</span>
+  <input type="text" id="host2" name="text2" formControlName="text2">
+  <span>&nbsp;</span>
+  <label for="date1">at local time:</label>
+  <span>&nbsp;</span>
+  <input type="datetime-local" id="date1" name="date1" formControlName="date1">
+  <label for="num">. Every </label>
+  <span>&nbsp;</span>
+  <input type="number" value="1" min="1" id="num" name="text3" formControlName="text3" style="width:10%">
+  <select id="sel2" name="sellist2" formControlName="sellist2">
+    <option>yrs</option>
+    <option>mns</option>
+    <option>wks</option>
+    <option>days</option>
+    <option selected>hrs</option>
+    <option>mins</option></select>
+  . Total:
+  <input type="number" value="1" min="1" id="total" name="total" formControlName="total" style="width:10%">
+  times.
+  <br>
+  <label for="sel3">With</label>
+  <span>&nbsp;</span>
+  <select id="sel3" name="sellist3" formControlName="sellist3">
+    <option selected>result=all</option>
+    <option>result>60</option>
+  </select>
+  <span>&nbsp;</span>
+  <label for="sel4">uses</label>
+  <span>&nbsp;</span>
+  <select id="sel4" name="sellist4" formControlName="sellist4" (change)="onChangeResult()">
+    <option [value]="tool" *ngFor="let tool of toolHeadlers">{{tool}}</option>
+  </select>
+  <span>&nbsp;</span>
+  <input type="checkbox"  formControlName="account" (change)="onChange()"/>
+  <span>Uses account data</span>
+  <input type="text" id="host3" name="text4" formControlName="text4">
+  <br>
   <button id="butt4" type="submit" value="submit" class="btn btn-info" [disabled]="newTaskForm.invalid">Save..</button>
-
 </form>

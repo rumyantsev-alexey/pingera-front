@@ -1,12 +1,12 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {UsersessionService} from "../usersession/usersession.service";
 
 @Component({
-  selector: 'app-logout',
-  templateUrl: './logout.component.html',
-  styleUrls: []
+  selector: 'logout',
+  template: ''
 })
+
 export class LogoutComponent implements OnInit {
 
   constructor(
