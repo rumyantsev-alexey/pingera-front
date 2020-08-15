@@ -1,5 +1,6 @@
 import {Injectable, OnInit} from "@angular/core";
 import {HttpHeaders} from "@angular/common/http";
+import {User} from "../classez/classez.module";
 
 @Injectable({
   providedIn: "root"
@@ -31,12 +32,14 @@ export class UsersessionService implements OnInit {
     sessionStorage.setItem('lastchata', lastchat)
   }
 
-  public  getLastEmail() {
-    return this.isLogin()?sessionStorage.getItem('lastemaila'): null
-  }
-
-  public  getLastChat() {
-    return this.isLogin()? sessionStorage.getItem('lastchata'): null
+  public getUser(): User {
+    let result: User = new User()
+    if (this.isLogin()) {
+      result.name = atob(sessionStorage.getItem('tokena')).substring(0, atob(sessionStorage.getItem('tokena')).search(':'))
+      result.lastemail = sessionStorage.getItem('lastemaila')
+      result.lastchatid = sessionStorage.getItem('lastchata')
+    }
+    return result
   }
 
   public getAuthHeader(): HttpHeaders {

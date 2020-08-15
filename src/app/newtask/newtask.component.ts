@@ -71,7 +71,7 @@ export class NewtaskComponent implements OnInit {
         text3: new FormControl(1, [
           Validators.required
         ]),
-        text4: new FormControl({value: this.US.getLastEmail(), disabled: true}),
+        text4: new FormControl({value: this.US.getUser().lastemail, disabled: true}),
 
         account: new FormControl(true, [
           Validators.required
@@ -128,11 +128,11 @@ export class NewtaskComponent implements OnInit {
     let res: string
     switch(this.newTaskForm.get('sellist4').value) {
       case 'email': {
-        res = this.US.getLastEmail()
+        res = this.US.getUser().lastemail
         break;
       }
       case 'telegramm': {
-        res = this.US.getLastChat()
+        res = this.US.getUser().lastchatid
         break;
       }
       default: {

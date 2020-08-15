@@ -50,8 +50,8 @@ export class ListComponent implements OnInit{
   }
 
   openModalModalWindows(modal2) {
-    if (sessionStorage.getItem('token') != null) {
-      let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
+    if (this.US.isLogin()) {
+      let headers: HttpHeaders = this.US.getAuthHeader()
       this.http.get<SubTaskDto[]>('http://localhost:8080/getallcompletesubtasksfortask/' + this.currTask.id, {headers})
         .subscribe( st =>
           this.CompleteSubTasks = st

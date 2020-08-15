@@ -37,8 +37,8 @@ export class ResultsComponent implements OnInit {
 
  openModalWindows(modal, task: Task) {
     this.curTask = task
-    if (sessionStorage.getItem('token') != null) {
-      let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
+    if (this.US.isLogin()) {
+      let headers: HttpHeaders =this.US.getAuthHeader()
       this.http.get<SubTaskDto[]>('http://localhost:8080/getallcompletesubtasksfortask/' + task.id, {headers})
         .subscribe( st =>
           this.CompleteSubTasks = st
@@ -48,14 +48,14 @@ export class ResultsComponent implements OnInit {
   }
 
   deleteTask(id: number) {
-    let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
+    let headers: HttpHeaders = this.US.getAuthHeader()
     this.http.delete<void>('http://localhost:8080/deletetask/' + id, {headers})
       .subscribe(() => this.CompleteTasks = this.CompleteTasks.filter(t => t.id !== id))
   }
 
   openModalModalWindows(modal2) {
-    if (sessionStorage.getItem('token') != null) {
-      let headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + sessionStorage.getItem('token')})
+    if (this.US.isLogin()) {
+      let headers: HttpHeaders = this.US.getAuthHeader()
       this.http.get<SubTaskDto[]>('http://localhost:8080/getallcompletesubtasksfortask/' + this.curTask.id, {headers})
         .subscribe( st => {
             this.CompleteSubTasks = st
