@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Task} from "../classez/classez.module";
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UsersessionService} from "../usersession/usersession.service";
+import {throwError} from "rxjs";
+import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'app-newtask',
@@ -33,8 +35,14 @@ export class NewtaskComponent implements OnInit {
 
       let headers: HttpHeaders = this.US.getAuthHeader()
       this.http.get<string[]>('http://localhost:8080/gettools', {headers})
+        .pipe(
+          catchError(this.handleError)
+        )
         .subscribe((s) => this.tools = s)
       this.http.get<string[]>('http://localhost:8080/gettoolhandlers', {headers})
+        .pipe(
+          catchError(this.handleError)
+        )
         .subscribe((s) => this.toolHeadlers = s)
 
       // todo обработка ошибок га сервере
@@ -59,7 +67,7 @@ export class NewtaskComponent implements OnInit {
         sellist2: new FormControl("hrs", [
           Validators.required
         ]),
-        sellist3: new FormControl({value: 'result=all', disabled: true}, [
+        sellist3: new FormControl('result=all', [
           Validators.required
         ]),
         sellist4: new FormControl("email", [
@@ -93,6 +101,9 @@ export class NewtaskComponent implements OnInit {
     let headers: HttpHeaders = this.US.getAuthHeader()
 
     this.http.post<Task>('http://localhost:8080/posttask', this.newTaskForm.value, {headers})
+      .pipe(
+        catchError(this.handleError)
+      )
       .subscribe()
 
     switch(this.newTaskForm.get('sellist4').value) {
@@ -144,4 +155,8 @@ export class NewtaskComponent implements OnInit {
     });
   }
 
+  private handleError(error: HttpErrorResponse) {
+    return throwError(
+      '(NewtaskComponent) Проблемы на стороне сервера. Проверьте Интернет или запустили ли вы серверную часть приложения.')
+  }
 }

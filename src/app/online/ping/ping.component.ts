@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Ping} from "../../classez/classez.module";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {throwError} from "rxjs";
+import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'app-ping',
@@ -15,7 +17,10 @@ export class PingComponent implements OnInit {
   ping: Ping[]
   textheader: string
 
-  constructor(private http: HttpClient, private modalService: NgbModal) { }
+  constructor(
+    private http: HttpClient,
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit(): void {
   }
@@ -23,20 +28,19 @@ export class PingComponent implements OnInit {
   onPingToString(modal) {
     this.textheader = 'Host:' + this.host + ' count:' + this.count
     this.http.get<string>('http://localhost:8080/rest/pingtostring?host=' + this.host + '&count=' + this.count)
+      .pipe(
+        catchError(this.handleError)
+      )
       .subscribe((p) => {
           this.pings = p
           this.modalService.open(modal, { centered: true, size: "lg"})
           this.count = 4
       })
   }
-  onPing(modal) {
-    this.textheader = 'Host:' + this.host + ' count:' + this.count
-    this.http.get<Ping[]>('http://localhost:8080/rest/ping?host=' + this.host + '&count=' + this.count)
-      .subscribe((p) => {
-        this.ping = p
-        this.modalService.open(modal, { centered: true, size: "lg"})
-        this.count = 4
-      })
+
+  private handleError(error: HttpErrorResponse) {
+    return throwError(
+      '(PingComponent) Проблемы на стороне сервера. Проверьте Интернет или запустили ли вы серверную часть приложения.')
   }
 
 }

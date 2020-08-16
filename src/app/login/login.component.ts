@@ -1,10 +1,12 @@
 ﻿import {Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UsersessionService} from "../usersession/usersession.service";
 import {User} from "../classez/classez.module";
+import {throwError} from "rxjs";
+import {catchError} from "rxjs/operators";
 
 @Component({
     selector: 'login',
@@ -40,7 +42,11 @@ export class LoginComponent implements OnInit {
       this.http.post<User>('http://localhost:8080/login', {
         name: this.loginForm.value.name,
         password: this.loginForm.value.pass
-      }).subscribe(x => {
+      })
+        .pipe(
+          catchError(this.handleError)
+        )
+        .subscribe(x => {
          if (x != null ) {
            this.US.setToken(this.loginForm.value.name, this.loginForm.value.pass)
            this.US.setProp(x.lastemail, x.lastchatid)
@@ -50,4 +56,10 @@ export class LoginComponent implements OnInit {
           }
       });
   }
+
+  private handleError(error: HttpErrorResponse) {
+    return throwError(
+      '(LoginComponent) Проблемы на стороне сервера. Проверьте Интернет или запустили ли вы серверную часть приложения.')
+  }
+
 }

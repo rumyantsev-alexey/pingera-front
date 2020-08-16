@@ -1,1 +1,21 @@
-<p>traceroute writes</p>
+<form (ngSubmit)="onTraceToString(modal); ptrace.reset();" #ptrace="ngForm">
+  <label for="host" class="col-form-label">Do traceroute:</label>
+  <input type="text" class="host form-control" placeholder="Host" id="host" [(ngModel)]="host" required name="host"/>
+  <button class="btn btn-danger" type="submit"  [disabled]="ptrace.invalid" name="But1">
+    <span>Do IT!!!</span>
+  </button>
+  <button class="btn btn-info" type="reset" (click)="ptrace.reset();" name="But2">
+    <span>Reset</span>
+  </button>
+</form>
+
+<ng-template #modal  let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Traceroute result:</h4>
+  </div>
+  <div class="modal-body">
+    <div>
+      {{traceroute}}
+    </div>
+  </div>
+</ng-template>
