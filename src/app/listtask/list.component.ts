@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {SubTaskDto, Task} from "../classez/classez.module";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";

@@ -59,7 +59,7 @@ export class NewtaskComponent implements OnInit {
         sellist2: new FormControl("hrs", [
           Validators.required
         ]),
-        sellist3: new FormControl("result=all", [
+        sellist3: new FormControl({value: 'result=all', disabled: true}, [
           Validators.required
         ]),
         sellist4: new FormControl("email", [
